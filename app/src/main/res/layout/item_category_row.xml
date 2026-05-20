@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CATEGORY ROW ITEM — Explore Fragment
+    ═══════════════════════════════════════
+    Full-width row. Icon container | Name + count | Difficulty badge | Arrow
+    Background tint color is set programmatically per category in Java.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_card"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Icon container (color tinted in Java) -->
+    <LinearLayout
+        android:id="@+id/ll_cat_icon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_icon_orange"
+        android:gravity="center"
+        android:layout_marginEnd="14dp">
+
+        <TextView
+            android:id="@+id/tv_cat_row_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔷"
+            android:textSize="22sp"/>
+    </LinearLayout>
+
+    <!-- Name + tutorial count -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_cat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3D Modeling"
+            android:textColor="@color/white_secondary"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_cat_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="38 tutorials"
+            android:textColor="@color/gray_muted"
+            android:textSize="11sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Difficulty badge -->
+    <TextView
+        android:id="@+id/tv_cat_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="All levels"
+        android:textColor="@color/orange_neon"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:background="@drawable/bg_badge_orange"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"/>
+
+    <!-- Arrow -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="›"
+        android:textColor="@color/gray_muted"
+        android:textSize="22sp"/>
+
+</LinearLayout>

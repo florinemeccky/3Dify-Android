@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_primary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Avatar -->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout android:layout_width="72dp" android:layout_height="72dp"
+                android:background="@drawable/bg_avatar"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👤" android:textSize="30sp"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="florinemeccky"
+                android:textColor="@color/white_primary"
+                android:textSize="18sp" android:textStyle="bold"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="florinemeccky@gmail.com"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Intermediate"
+                    android:textColor="@color/orange_neon"
+                    android:textSize="10sp" android:textStyle="bold"
+                    android:background="@drawable/bg_badge_orange"
+                    android:paddingStart="8dp" android:paddingEnd="8dp"
+                    android:paddingTop="3dp" android:paddingBottom="3dp"
+                    android:layout_marginEnd="6dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24 done"
+                    android:textColor="@color/color_blue"
+                    android:textSize="10sp" android:textStyle="bold"
+                    android:background="@drawable/bg_badge_blue"
+                    android:paddingStart="8dp" android:paddingEnd="8dp"
+                    android:paddingTop="3dp" android:paddingBottom="3dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Options rows -->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Saved Tutorials -->
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_settings_row"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp" android:paddingEnd="14dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🔖  Saved Tutorials"
+                    android:textColor="@color/white_secondary" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="12" android:textColor="@color/gray_muted" android:textSize="13sp"/>
+            </LinearLayout>
+
+            <!-- Settings -->
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_settings_row"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp" android:paddingEnd="14dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="⚙️  Settings"
+                    android:textColor="@color/white_secondary" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="→" android:textColor="@color/gray_muted" android:textSize="16sp"/>
+            </LinearLayout>
+
+            <!-- Help -->
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_settings_row"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp" android:paddingEnd="14dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="❓  Help &amp; Support"
+                    android:textColor="@color/white_secondary" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="→" android:textColor="@color/gray_muted" android:textSize="16sp"/>
+            </LinearLayout>
+
+            <!-- About -->
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_settings_row"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp" android:paddingEnd="14dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ℹ️  About 3Dify"
+                    android:textColor="@color/white_secondary" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="v1.0.0" android:textColor="@color/gray_muted" android:textSize="13sp"/>
+            </LinearLayout>
+
+            <!-- Logout -->
+            <LinearLayout
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_logout"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="14dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🚪  Logout"
+                    android:textColor="@color/color_red"
+                    android:textSize="13sp" android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

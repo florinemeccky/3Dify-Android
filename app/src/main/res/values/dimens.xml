@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_s">8dp</dimen>
+    <dimen name="space_m">12dp</dimen>
+    <dimen name="space_l">16dp</dimen>
+    <dimen name="space_xl">24dp</dimen>
+    <dimen name="space_xxl">32dp</dimen>
+
+    <!-- Radii -->
+    <dimen name="radius_btn">10dp</dimen>
+    <dimen name="radius_card">14dp</dimen>
+    <dimen name="radius_icon">10dp</dimen>
+    <dimen name="radius_badge">20dp</dimen>
+    <dimen name="radius_input">10dp</dimen>
+    <dimen name="radius_small">8dp</dimen>
+
+    <!-- Component heights -->
+    <dimen name="btn_height">48dp</dimen>
+    <dimen name="btn_ghost_height">44dp</dimen>
+    <dimen name="input_height">52dp</dimen>
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="progress_bar_h">5dp</dimen>
+
+    <!-- Icon sizes -->
+    <dimen name="icon_xs">16dp</dimen>
+    <dimen name="icon_s">20dp</dimen>
+    <dimen name="icon_m">24dp</dimen>
+    <dimen name="icon_l">32dp</dimen>
+    <dimen name="icon_xl">48dp</dimen>
+    <dimen name="icon_logo">72dp</dimen>
+    <dimen name="icon_category">40dp</dimen>
+    <dimen name="icon_avatar">64dp</dimen>
+    <dimen name="icon_avatar_sm">40dp</dimen>
+    <dimen name="icon_notif">36dp</dimen>
+
+    <!-- Tutorial card -->
+    <dimen name="tut_thumb_height">80dp</dimen>
+    <dimen name="tut_card_min_width">130dp</dimen>
+    <dimen name="tut_video_height">200dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="text_display">28sp</dimen>
+    <dimen name="text_title_l">22sp</dimen>
+    <dimen name="text_title_m">18sp</dimen>
+    <dimen name="text_title_s">16sp</dimen>
+    <dimen name="text_body_l">14sp</dimen>
+    <dimen name="text_body_m">13sp</dimen>
+    <dimen name="text_body_s">12sp</dimen>
+    <dimen name="text_caption">11sp</dimen>
+    <dimen name="text_label">10sp</dimen>
+    <dimen name="text_tiny">9sp</dimen>
+</resources>

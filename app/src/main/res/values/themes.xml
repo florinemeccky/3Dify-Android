@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        3DIFY DARK THEME (Primary)
+        Based on Material3 DayNight with full dark-mode customization.
+    -->
+    <style name="Theme.3Dify" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Primary brand color (Blender Orange) -->
+        <item name="colorPrimary">@color/orange_primary</item>
+        <item name="colorPrimaryVariant">@color/orange_light</item>
+        <item name="colorOnPrimary">#000000</item>
+
+        <!-- Secondary -->
+        <item name="colorSecondary">@color/orange_light</item>
+        <item name="colorSecondaryVariant">@color/orange_light</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+
+        <!-- Background / Surface -->
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnSurface">@color/text_body</item>
+        <item name="colorOnBackground">@color/text_body</item>
+
+        <!-- Status bar and navigation bar -->
+        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:navigationBarColor">@color/bg_card</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Ripple -->
+        <item name="colorControlHighlight">#33FF8C42</item>
+
+        <!-- Font family -->
+        <item name="android:fontFamily">monospace</item>
+    </style>
+
+    <!-- Splash Screen theme — hides status bar, full screen -->
+    <style name="Theme.3Dify.Splash" parent="Theme.3Dify">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/bg_primary</item>
+    </style>
+
+</resources>

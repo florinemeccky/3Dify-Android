@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CATEGORY PILL ITEM
+    ═══════════════════
+    Used in the horizontal RecyclerView in HomeFragment (Categories row)
+    and also as the grid in ExploreFragment.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginEnd="10dp"
+    android:padding="10dp"
+    android:background="@drawable/bg_card"
+    android:minWidth="64dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Icon container -->
+    <LinearLayout
+        android:id="@+id/ll_icon_container"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_icon_orange"
+        android:gravity="center"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:id="@+id/tv_cat_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔷"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <!-- Label -->
+    <TextView
+        android:id="@+id/tv_cat_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Basics"
+        android:textColor="@color/gray_text"
+        android:textSize="10sp"
+        android:gravity="center"/>
+
+</LinearLayout>

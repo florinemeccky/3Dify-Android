@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds -->
+    <color name="black_primary">#0A0A0A</color>
+    <color name="black_card">#111111</color>
+    <color name="black_card2">#181818</color>
+    <color name="black_surface">#1E1E1E</color>
+    <color name="black_elevated">#242424</color>
+
+    <!-- Neon Orange Accent -->
+    <color name="orange_neon">#FF6A00</color>
+    <color name="orange_glow">#FF8C00</color>
+    <color name="orange_dim">#1AFF6A00</color>
+    <color name="orange_mid">#33FF6A00</color>
+    <color name="orange_border">#44FF6A00</color>
+
+    <!-- Theme colors -->
+    <color name="orange_primary">#FF6A00</color>
+    <color name="orange_light">#FF8C42</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_body">#E0E0E0</color>
+    <color name="bg_primary">#0A0A0A</color>
+    <color name="bg_card">#111111</color>
+    <color name="bg_card2">#181818</color>
+
+    <!-- Text -->
+    <color name="white_primary">#FFFFFF</color>
+    <color name="white_secondary">#E0E0E0</color>
+    <color name="gray_text">#999999</color>
+    <color name="gray_muted">#555555</color>
+
+    <!-- Borders - ONLY ONCE! -->
+    <color name="border_dark">#2A2A2A</color>
+    <color name="border_mid">#333333</color>
+
+    <!-- Semantic / Category Colors -->
+    <color name="color_blue">#4A90E2</color>
+    <color name="color_green">#2ECC71</color>
+    <color name="color_purple">#7B5EA7</color>
+    <color name="color_yellow">#F4D03F</color>
+    <color name="color_red">#E74C3C</color>
+
+    <color name="blue_dim">#1A4A90E2</color>
+    <color name="green_dim">#1A2ECC71</color>
+    <color name="purple_dim">#1A7B5EA7</color>
+    <color name="red_dim">#33E74C3C</color>
+
+    <!-- Bottom nav -->
+    <color name="nav_active">#FF6A00</color>
+    <color name="nav_inactive">#555555</color>
+    <color name="bottom_nav_item_color">#FF6A00</color>
+
+    <!-- Light theme colors -->
+    <color name="text_primary_light">#1A1A1A</color>
+    <color name="bg_primary_light">#F5F5F5</color>
+    <color name="bg_card_light">#FFFFFF</color>
+    <color name="text_muted">#707070</color>
+    <color name="text_gray_light">#999999</color>
+</resources>
