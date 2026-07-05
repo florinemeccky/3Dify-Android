@@ -1,288 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    PROGRESS FRAGMENT
-    ══════════════════
-    WHY: Motivation hub. Shows stats, per-skill bars, and unlocked achievements.
-    Sections: Stat cards row | Skills progress | Achievements grid
--->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary">
+    android:background="#0A0A0A">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="28dp"
         android:paddingBottom="24dp">
 
-        <!-- ── Header ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="20dp"
             android:text="Your Progress."
-            android:textColor="@color/white_primary"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
 
-        <!-- ── Stat Cards Row ── -->
+        <!-- Stat cards row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="24dp">
 
-            <!-- Completed stat -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_stat_card"
+                android:background="#111111"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <TextView
                     android:id="@+id/tv_completed_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="24"
-                    android:textColor="@color/orange_neon"
-                    android:textSize="28sp"
+                    android:text="0"
+                    android:textColor="#FF6A00"
+                    android:textSize="32sp"
                     android:textStyle="bold"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Completed"
-                    android:textColor="@color/gray_muted"
-                    android:textSize="11sp"
+                    android:textColor="#666666"
+                    android:textSize="12sp"
                     android:layout_marginTop="4dp"/>
             </LinearLayout>
 
-            <!-- Streak stat -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/bg_stat_card"
+                android:background="#111111"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="16dp">
+                android:padding="20dp">
 
                 <TextView
                     android:id="@+id/tv_streak_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7🔥"
-                    android:textColor="@color/color_red"
-                    android:textSize="28sp"
+                    android:text="0🔥"
+                    android:textColor="#E74C3C"
+                    android:textSize="32sp"
                     android:textStyle="bold"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Day Streak"
-                    android:textColor="@color/gray_muted"
-                    android:textSize="11sp"
+                    android:textColor="#666666"
+                    android:textSize="12sp"
                     android:layout_marginTop="4dp"/>
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- ── Skills Progress Card ── -->
+        <!-- Skill bars placeholder -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="SKILLS PROGRESS"
-            android:textColor="@color/gray_muted"
-            android:textSize="10sp"
-            android:letterSpacing="0.15"/>
-
-        <LinearLayout
-            android:id="@+id/card_skills"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_card"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Skill row: Modeling -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:layout_marginBottom="14dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:layout_marginBottom="6dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="Modeling"
-                        android:textColor="@color/white_secondary" android:textSize="12sp"/>
-                    <TextView android:id="@+id/tv_skill_modeling_pct"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="72%" android:textColor="@color/orange_neon" android:textSize="12sp"/>
-                </LinearLayout>
-                <FrameLayout android:layout_width="match_parent" android:layout_height="5dp"
-                    android:background="@drawable/bg_progress_track">
-                    <View android:id="@+id/bar_modeling" android:layout_width="0dp"
-                        android:layout_height="5dp" android:background="@drawable/bg_btn_orange"/>
-                </FrameLayout>
-            </LinearLayout>
-
-            <!-- Skill row: Animation -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:layout_marginBottom="14dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:layout_marginBottom="6dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="Animation"
-                        android:textColor="@color/white_secondary" android:textSize="12sp"/>
-                    <TextView android:id="@+id/tv_skill_anim_pct"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="38%" android:textColor="@color/color_purple" android:textSize="12sp"/>
-                </LinearLayout>
-                <FrameLayout android:layout_width="match_parent" android:layout_height="5dp"
-                    android:background="@drawable/bg_progress_track">
-                    <View android:id="@+id/bar_animation" android:layout_width="0dp"
-                        android:layout_height="5dp" android:backgroundTint="@color/color_purple"
-                        android:background="@drawable/bg_btn_orange"/>
-                </FrameLayout>
-            </LinearLayout>
-
-            <!-- Skill row: Sculpting -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:layout_marginBottom="14dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:layout_marginBottom="6dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="Sculpting"
-                        android:textColor="@color/white_secondary" android:textSize="12sp"/>
-                    <TextView android:id="@+id/tv_skill_sculpt_pct"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="55%" android:textColor="@color/color_blue" android:textSize="12sp"/>
-                </LinearLayout>
-                <FrameLayout android:layout_width="match_parent" android:layout_height="5dp"
-                    android:background="@drawable/bg_progress_track">
-                    <View android:id="@+id/bar_sculpting" android:layout_width="0dp"
-                        android:layout_height="5dp" android:backgroundTint="@color/color_blue"
-                        android:background="@drawable/bg_btn_orange"/>
-                </FrameLayout>
-            </LinearLayout>
-
-            <!-- Skill row: Rendering -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:layout_marginBottom="6dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="Rendering"
-                        android:textColor="@color/white_secondary" android:textSize="12sp"/>
-                    <TextView android:id="@+id/tv_skill_render_pct"
-                        android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="20%" android:textColor="@color/color_yellow" android:textSize="12sp"/>
-                </LinearLayout>
-                <FrameLayout android:layout_width="match_parent" android:layout_height="5dp"
-                    android:background="@drawable/bg_progress_track">
-                    <View android:id="@+id/bar_rendering" android:layout_width="0dp"
-                        android:layout_height="5dp" android:backgroundTint="@color/color_yellow"
-                        android:background="@drawable/bg_btn_orange"/>
-                </FrameLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!-- ── Achievements ── -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:text="ACHIEVEMENTS"
-            android:textColor="@color/gray_muted"
-            android:textSize="10sp"
-            android:letterSpacing="0.15"/>
-
-        <!-- 2-column grid using nested LinearLayouts -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp">
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="horizontal" android:layout_marginBottom="10dp">
-
-                <!-- Achievement 1: unlocked -->
-                <LinearLayout
-                    android:layout_width="0dp" android:layout_height="wrap_content"
-                    android:layout_weight="1" android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_achievement"
-                    android:orientation="vertical" android:gravity="center" android:padding="14dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="🏆" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="First Tutorial" android:textColor="@color/gray_text"
-                        android:textSize="10sp" android:gravity="center" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Achievement 2: unlocked -->
-                <LinearLayout
-                    android:layout_width="0dp" android:layout_height="wrap_content"
-                    android:layout_weight="1" android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_achievement"
-                    android:orientation="vertical" android:gravity="center" android:padding="14dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="🔥" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="7 Day Streak" android:textColor="@color/gray_text"
-                        android:textSize="10sp" android:gravity="center" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Achievement 3: locked -->
-                <LinearLayout
-                    android:layout_width="0dp" android:layout_height="wrap_content"
-                    android:layout_weight="1" android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_achievement_locked"
-                    android:orientation="vertical" android:gravity="center" android:padding="14dp"
-                    android:alpha="0.4">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="🧊" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="Modeler" android:textColor="@color/gray_text"
-                        android:textSize="10sp" android:gravity="center" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Achievement 4: locked -->
-                <LinearLayout
-                    android:layout_width="0dp" android:layout_height="wrap_content"
-                    android:layout_weight="1" android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_achievement_locked"
-                    android:orientation="vertical" android:gravity="center" android:padding="14dp"
-                    android:alpha="0.4">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="🎨" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="Artist" android:textColor="@color/gray_text"
-                        android:textSize="10sp" android:gravity="center" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
+            android:text="Skill progress bars coming in Phase 4"
+            android:textColor="#444444"
+            android:textSize="13sp"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

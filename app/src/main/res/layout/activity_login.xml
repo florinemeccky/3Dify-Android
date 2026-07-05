@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    LOGIN ACTIVITY
-    ═══════════════
-    WHY: Gate to the app. Supports Email/Password, Google, and Guest modes.
-    FLOW: → MainActivity (success) | → RegisterActivity (new user)
-    Keyboard pushes layout up via adjustResize (set in manifest).
+    activity_login.xml
+    IDs that LoginActivity.java requires:
+      - tv_logo_text     (the "3Dify" title text)
+      - et_email         (email input field)
+      - et_password      (password input field)
+      - tv_forgot        (forgot password link)
+      - btn_login        (login button)
+      - progress_bar     (loading spinner)
+      - btn_guest        (continue as guest button)
+      - tv_signup        (sign up link at the bottom)
 -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="#0A0A0A"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,118 +27,170 @@
         android:paddingTop="60dp"
         android:paddingBottom="40dp">
 
-        <!-- ── Logo ── -->
-        <ImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@android:drawable/star_big_on"
-            android:background="@drawable/bg_icon_orange"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <!-- ── Title "Welcome." ── -->
-        <TextView
-            android:id="@+id/tv_title"
+        <!-- Logo row: ice cube emoji + "3Dify" text -->
+        <LinearLayout
+            android:id="@+id/ll_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Welcome."
-            android:textColor="@color/white_primary"
-            android:textSize="26sp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧊"
+                android:textSize="26sp"
+                android:layout_marginEnd="10dp"/>
+
+            <!-- ID: tv_logo_text — Java colors the D orange via SpannableString -->
+            <TextView
+                android:id="@+id/tv_logo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3Dify"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Welcome title -->
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Welcome back."
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@id/ll_logo"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- ── Subtitle ── -->
+        <!-- Subtitle -->
         <TextView
             android:id="@+id/tv_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:text="Sign in to continue learning"
-            android:textColor="@color/gray_text"
-            android:textSize="13sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- ── Email field ── -->
+        <!-- Email label -->
+        <TextView
+            android:id="@+id/lbl_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Email address"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- ID: et_email -->
         <EditText
             android:id="@+id/et_email"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="28dp"
-            android:hint="Email address"
-            android:textColor="@color/white_secondary"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
+            android:layout_marginTop="8dp"
+            android:background="#111111"
+            android:hint="Enter your email"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#444444"
+            android:textSize="14sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/lbl_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Password field ── -->
+        <!-- Password label -->
+        <TextView
+            android:id="@+id/lbl_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Password"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/et_email"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- ID: et_password -->
         <EditText
             android:id="@+id/et_password"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:hint="Password"
-            android:textColor="@color/white_secondary"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
+            android:layout_marginTop="8dp"
+            android:background="#111111"
+            android:hint="Enter your password"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#444444"
+            android:textSize="14sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:inputType="textPassword"
             android:singleLine="true"
             android:imeOptions="actionDone"
-            app:layout_constraintTop_toBottomOf="@id/et_email"
+            app:layout_constraintTop_toBottomOf="@id/lbl_password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Forgot password ── -->
+        <!-- ID: tv_forgot — tapped to go to ResetPasswordActivity -->
         <TextView
             android:id="@+id/tv_forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:text="Forgot password?"
-            android:textColor="@color/orange_neon"
-            android:textSize="12sp"
+            android:textColor="#FF6A00"
+            android:textSize="13sp"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/et_password"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Login button ── -->
+        <!-- ID: btn_login -->
         <Button
             android:id="@+id/btn_login"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="Login"
-            android:textColor="@color/black_primary"
+            android:layout_height="52dp"
+            android:layout_marginTop="20dp"
+            android:text="Sign In"
+            android:textColor="#000000"
             android:textStyle="bold"
-            android:textSize="14sp"
-            android:background="@drawable/bg_btn_orange"
+            android:textSize="15sp"
+            android:backgroundTint="#FF6A00"
             app:layout_constraintTop_toBottomOf="@id/tv_forgot"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── OR divider ── -->
+        <!-- ID: progress_bar — hidden until login is in progress -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            android:indeterminateTint="#FF6A00"
+            app:layout_constraintTop_toBottomOf="@id/btn_login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- OR divider -->
         <LinearLayout
             android:id="@+id/ll_or"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@id/btn_login"
@@ -141,71 +198,43 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <View android:layout_width="0dp" android:layout_height="1dp"
-                android:layout_weight="1" android:background="@color/border_dark"/>
+                android:layout_weight="1" android:background="#222222"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:layout_marginStart="12dp" android:layout_marginEnd="12dp"
-                android:text="OR" android:textColor="@color/gray_muted" android:textSize="11sp"/>
+                android:text="OR" android:textColor="#444444" android:textSize="12sp"/>
             <View android:layout_width="0dp" android:layout_height="1dp"
-                android:layout_weight="1" android:background="@color/border_dark"/>
+                android:layout_weight="1" android:background="#222222"/>
         </LinearLayout>
 
-        <!-- ── Google button ── -->
-        <LinearLayout
-            android:id="@+id/ll_google"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:background="@drawable/bg_btn_google"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintTop_toBottomOf="@id/ll_or"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="G" android:textColor="@color/orange_neon"
-                android:textSize="16sp" android:textStyle="bold"
-                android:layout_marginEnd="10dp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Continue with Google"
-                android:textColor="@color/white_secondary" android:textSize="13sp"/>
-        </LinearLayout>
-
-        <!-- ── Guest button ── -->
+        <!-- ID: btn_guest -->
         <Button
             android:id="@+id/btn_guest"
             android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
             android:text="Continue as Guest"
-            android:textColor="@color/gray_text"
-            android:textSize="13sp"
-            android:background="@drawable/bg_btn_ghost"
-            app:layout_constraintTop_toBottomOf="@id/ll_google"
+            android:textColor="#FF6A00"
+            android:textSize="14sp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/ll_or"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Register link ── -->
+        <!-- ID: tv_signup — Java colors "Sign up" orange via SpannableString -->
         <TextView
-            android:id="@+id/tv_register"
+            android:id="@+id/tv_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="No account? Create one"
-            android:textColor="@color/gray_text"
-            android:textSize="13sp"
+            android:text="Don't have an account? Sign up"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/btn_guest"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-        <!--
-            In LoginActivity.java, set a SpannableString on tv_register
-            so "Create one" is orange (#FF6A00), just like the D in 3Dify.
-        -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

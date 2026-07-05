@@ -11,8 +11,11 @@ import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.R;
+import android.os.Looper;
+import com.example.a3dify.activities.OnboardingActivity;
+import com.example.a3dify.activities.LoginActivity;
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class Splash extends AppCompatActivity {
         appName.setText(text);
 
         // Wait 2.5 seconds then navigate based on onboarding status
-        new Handler().postDelayed(() -> {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
             // Check if user has seen onboarding before
             SharedPreferences prefs = getSharedPreferences("3dify_prefs", MODE_PRIVATE);
             boolean onboardingDone = prefs.getBoolean("onboarding_done", false);
@@ -35,10 +38,10 @@ public class Splash extends AppCompatActivity {
             Intent intent;
             if (!onboardingDone) {
                 // First time user - show onboarding
-                intent = new Intent(Splash.this, OnboardingActivity.class);
+                intent = new Intent(SplashActivity.this, OnboardingActivity.class);
             } else {
                 // Returning user - go to login
-                intent = new Intent(Splash.this, LoginActivity.class);
+                intent = new Intent(SplashActivity.this, LoginActivity.class);
             }
             startActivity(intent);
             finish();

@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    REGISTER ACTIVITY
-    ══════════════════
-    WHY: New user account creation.
-    FLOW: LoginActivity → RegisterActivity → LoginActivity (after success)
+    activity_register.xml
+    IDs that RegisterActivity.java requires:
+      - tv_back       (back arrow)
+      - et_username   (username field)
+      - et_email      (email field)
+      - et_password   (password field)
+      - et_confirm    (confirm password field)
+      - cb_terms      (terms checkbox)
+      - btn_create    (create account button)
+      - progress_bar  (loading spinner)
+      - tv_login      (already have account link)
 -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_primary"
+    android:background="#0A0A0A"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,181 +25,241 @@
         android:layout_height="wrap_content"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:paddingTop="60dp"
+        android:paddingTop="48dp"
         android:paddingBottom="40dp">
 
-        <!-- ── Back arrow ── -->
+        <!-- ID: tv_back -->
         <TextView
             android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="← Back"
-            android:textColor="@color/orange_neon"
-            android:textSize="13sp"
+            android:textColor="#FF6A00"
+            android:textSize="14sp"
             android:clickable="true"
             android:focusable="true"
+            android:padding="4dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- ── Title ── -->
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Create Account."
-            android:textColor="@color/white_primary"
-            android:textSize="26sp"
+            android:layout_marginTop="24dp"
+            android:text="Create account."
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/tv_back"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- ── Subtitle ── -->
         <TextView
             android:id="@+id/tv_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Join 3Dify and start your journey"
-            android:textColor="@color/gray_text"
-            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="Join thousands of 3D learners today"
+            android:textColor="#888888"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- ── Username field ── -->
+        <!-- Username label -->
+        <TextView
+            android:id="@+id/lbl_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Username"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- ID: et_username -->
         <EditText
             android:id="@+id/et_username"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="28dp"
-            android:hint="Username"
-            android:textColor="@color/white_secondary"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
+            android:layout_marginTop="8dp"
+            android:background="#111111"
+            android:hint="Choose a username"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#444444"
+            android:textSize="14sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:inputType="textPersonName"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/lbl_username"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Email field ── -->
+        <!-- Email label -->
+        <TextView
+            android:id="@+id/lbl_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Email address"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/et_username"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- ID: et_email -->
         <EditText
             android:id="@+id/et_email"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:hint="Email address"
-            android:textColor="@color/white_secondary"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
+            android:layout_marginTop="8dp"
+            android:background="#111111"
+            android:hint="Enter your email"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#444444"
+            android:textSize="14sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            app:layout_constraintTop_toBottomOf="@id/et_username"
+            app:layout_constraintTop_toBottomOf="@id/lbl_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Password field ── -->
+        <!-- Password label -->
+        <TextView
+            android:id="@+id/lbl_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Password"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/et_email"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- ID: et_password -->
         <EditText
             android:id="@+id/et_password"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:hint="Password"
-            android:textColor="@color/white_secondary"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
+            android:layout_marginTop="8dp"
+            android:background="#111111"
+            android:hint="Min. 6 characters"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#444444"
+            android:textSize="14sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:inputType="textPassword"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            app:layout_constraintTop_toBottomOf="@id/et_email"
+            app:layout_constraintTop_toBottomOf="@id/lbl_password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Confirm password ── -->
+        <!-- Confirm password label -->
+        <TextView
+            android:id="@+id/lbl_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Confirm password"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/et_password"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- ID: et_confirm -->
         <EditText
             android:id="@+id/et_confirm"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:hint="Confirm Password"
-            android:textColor="@color/white_secondary"
-            android:textColorHint="@color/gray_muted"
-            android:textSize="13sp"
-            android:background="@drawable/bg_input"
+            android:layout_marginTop="8dp"
+            android:background="#111111"
+            android:hint="Re-enter your password"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#444444"
+            android:textSize="14sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:inputType="textPassword"
             android:singleLine="true"
             android:imeOptions="actionDone"
-            app:layout_constraintTop_toBottomOf="@id/et_password"
+            app:layout_constraintTop_toBottomOf="@id/lbl_confirm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Terms row ── -->
+        <!-- Terms checkbox row -->
         <LinearLayout
             android:id="@+id/ll_terms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
             android:gravity="top"
             app:layout_constraintTop_toBottomOf="@id/et_confirm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <!-- ID: cb_terms -->
             <CheckBox
                 android:id="@+id/cb_terms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/orange_neon"/>
+                android:buttonTint="#FF6A00"/>
 
             <TextView
-                android:id="@+id/tv_terms"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:text="I agree to the Terms of Service and Privacy Policy"
-                android:textColor="@color/gray_text"
-                android:textSize="11sp"
+                android:textColor="#888888"
+                android:textSize="12sp"
                 android:lineSpacingMultiplier="1.4"/>
         </LinearLayout>
 
-        <!-- ── Create Account button ── -->
+        <!-- ID: btn_create -->
         <Button
             android:id="@+id/btn_create"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="20dp"
             android:text="Create Account"
-            android:textColor="@color/black_primary"
+            android:textColor="#000000"
             android:textStyle="bold"
-            android:textSize="14sp"
-            android:background="@drawable/bg_btn_orange"
+            android:textSize="15sp"
+            android:backgroundTint="#FF6A00"
             app:layout_constraintTop_toBottomOf="@id/ll_terms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- ── Sign in link ── -->
+        <!-- ID: progress_bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            android:indeterminateTint="#FF6A00"
+            app:layout_constraintTop_toBottomOf="@id/btn_create"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- ID: tv_login — Java colors "Sign in" orange -->
         <TextView
-            android:id="@+id/tv_signin"
+            android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Already have one? Sign in"
-            android:textColor="@color/gray_text"
-            android:textSize="13sp"
+            android:text="Already have an account? Sign in"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintTop_toBottomOf="@id/btn_create"
