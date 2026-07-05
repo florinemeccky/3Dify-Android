@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#0A0A0A" android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <TextView android:id="@+id/tv_back"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="← Back" android:textColor="#FF6A00" android:textSize="14sp"
+            android:clickable="true" android:focusable="true" android:padding="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView android:id="@+id/tv_title"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="Submit Complaint."
+            android:textColor="#FFFFFF" android:textSize="26sp" android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_back"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView android:id="@+id/tv_subtitle"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="We take every complaint seriously and will review it promptly."
+            android:textColor="#888888" android:textSize="14sp"
+            android:lineSpacingMultiplier="1.4"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView android:id="@+id/lbl_complaint"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="28dp" android:text="Describe your complaint"
+            android:textColor="#AAAAAA" android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText android:id="@+id/et_complaint"
+            android:layout_width="0dp" android:layout_height="140dp"
+            android:layout_marginTop="8dp" android:background="#111111"
+            android:hint="Describe your issue in detail…"
+            android:textColor="#FFFFFF" android:textColorHint="#444444"
+            android:textSize="14sp" android:padding="14dp"
+            android:gravity="top" android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/lbl_complaint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button android:id="@+id/btn_submit"
+            android:layout_width="0dp" android:layout_height="52dp"
+            android:layout_marginTop="20dp" android:text="Submit Complaint"
+            android:textColor="#000000" android:textStyle="bold" android:textSize="15sp"
+            android:backgroundTint="#FF6A00"
+            app:layout_constraintTop_toBottomOf="@id/et_complaint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView android:id="@+id/tv_success"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="✅ Complaint submitted. We will review it shortly."
+            android:textColor="#2ECC71" android:textSize="14sp"
+            android:gravity="center" android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btn_submit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

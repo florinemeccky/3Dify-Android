@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     fragment_home.xml
-    Home tab — dashboard with greeting, search, continue learning,
-    categories, and featured tutorials.
-    RecyclerViews and full data will be added in Phase 4.
+    Home tab layout. Uses NestedScrollView so all sections
+    scroll together. RecyclerViews inside scroll horizontally.
+
+    Required IDs for HomeFragment.java:
+      - tv_greeting_label   (time-based greeting)
+      - tv_username         (user's name from SQLite)
+      - view_progress_fill  (orange bar inside continue learning card)
+      - rv_categories       (horizontal category pills)
+      - rv_featured         (horizontal tutorial cards)
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,9 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="32dp">
 
-        <!-- Header: greeting and notification bell -->
+        <!-- ══ HEADER ══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,7 +32,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingTop="28dp"
-            android:paddingBottom="12dp">
+            android:paddingBottom="14dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -50,10 +56,8 @@
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
-
             </LinearLayout>
 
-            <!-- Notification bell -->
             <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -67,10 +71,9 @@
                     android:text="🔔"
                     android:textSize="18sp"/>
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- Search bar -->
+        <!-- ══ SEARCH BAR ══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="46dp"
@@ -80,7 +83,9 @@
             android:background="#111111"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingStart="14dp">
+            android:paddingStart="14dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,11 +98,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search tutorials…"
-                android:textColor="#555555"
+                android:textColor="#444444"
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Continue Learning section label -->
+        <!-- ══ CONTINUE LEARNING LABEL ══ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,7 +113,7 @@
             android:textSize="11sp"
             android:letterSpacing="0.12"/>
 
-        <!-- Continue Learning card -->
+        <!-- ══ CONTINUE LEARNING CARD ══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,11 +131,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="#1AFF6A00"
                     android:gravity="center"
                     android:layout_marginEnd="12dp">
@@ -159,7 +164,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Lesson 4 of 12"
-                        android:textColor="#666666"
+                        android:textColor="#555555"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
@@ -178,12 +183,12 @@
                     android:paddingBottom="3dp"/>
             </LinearLayout>
 
-            <!-- Progress bar track -->
+            <!-- Progress bar track and animated fill -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="#222222">
-                <!-- Orange fill at 67% width — set programmatically in Phase 4 -->
+
                 <View
                     android:id="@+id/view_progress_fill"
                     android:layout_width="0dp"
@@ -192,25 +197,66 @@
             </FrameLayout>
         </LinearLayout>
 
-        <!-- Featured Tutorials label -->
+        <!-- ══ CATEGORIES LABEL ══ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="10dp"
-            android:text="FEATURED TUTORIALS"
+            android:text="CATEGORIES"
             android:textColor="#555555"
             android:textSize="11sp"
             android:letterSpacing="0.12"/>
 
-        <!-- Placeholder for tutorial cards — RecyclerView added in Phase 4 -->
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- ══ CATEGORIES HORIZONTAL RECYCLER ══ -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_categories"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="Tutorial cards coming in Phase 4"
-            android:textColor="#444444"
-            android:textSize="13sp"/>
+            android:layout_marginBottom="28dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"/>
+
+        <!-- ══ FEATURED TUTORIALS LABEL ══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FEATURED TUTORIALS"
+                android:textColor="#555555"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See all →"
+                android:textColor="#FF6A00"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+
+        <!-- ══ FEATURED TUTORIALS HORIZONTAL RECYCLER ══ -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_featured"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

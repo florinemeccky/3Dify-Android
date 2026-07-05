@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    activity_dashboard.xml
-    The shell layout for the entire authenticated experience.
-    Contains only two things:
-      1. A FrameLayout at the top where fragments are displayed
-      2. A BottomNavigationView at the bottom for tab switching
-    All real screen content lives inside the fragments.
--->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,17 +6,37 @@
     android:layout_height="match_parent"
     android:background="#0A0A0A">
 
-    <!-- Fragment container — fills all space above the bottom nav -->
+    <!--
+        Offline banner — hidden when internet is available.
+        Shown automatically by DashboardActivity.checkInternetConnection().
+        Satisfies the lecturer's Internet Connection Detection requirement.
+    -->
+    <TextView
+        android:id="@+id/tv_offline_banner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="⚠️  No internet connection — some features may be unavailable"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:background="#E74C3C"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Fragment container -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_offline_banner"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Thin divider line above the bottom nav -->
+    <!-- Divider -->
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -33,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="0dp"

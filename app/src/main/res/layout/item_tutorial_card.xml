@@ -1,64 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    TUTORIAL CARD ITEM
-    ═══════════════════
-    Used in the horizontal featured/recommended RecyclerViews.
-    Min-width 130dp so cards are nicely sized on all phones.
-    Tapped → TutorialDetailActivity
+    item_tutorial_card.xml
+    A single tutorial card used in horizontal RecyclerViews.
+    Width is fixed at 150dp so cards are consistently sized.
+    Tapping the card opens TutorialDetailActivity (Phase 5).
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="130dp"
+    android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginEnd="12dp"
-    android:padding="10dp"
-    android:background="@drawable/bg_card"
+    android:background="#111111"
+    android:padding="12dp"
     android:clickable="true"
     android:focusable="true">
 
-    <!-- Thumbnail area -->
+    <!-- Thumbnail area with emoji icon -->
     <LinearLayout
-        android:id="@+id/ll_thumb"
+        android:id="@+id/ll_thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:background="@drawable/bg_tut_thumb"
+        android:layout_height="80dp"
+        android:background="#1AFF6A00"
         android:gravity="center"
         android:layout_marginBottom="10dp">
 
         <TextView
-            android:id="@+id/tv_tut_icon"
+            android:id="@+id/tv_tutorial_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🎯"
-            android:textSize="28sp"/>
+            android:textSize="32sp"/>
     </LinearLayout>
 
-    <!-- Title -->
+    <!-- Tutorial title -->
     <TextView
-        android:id="@+id/tv_tut_title"
+        android:id="@+id/tv_tutorial_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sculpting Basics"
-        android:textColor="@color/white_secondary"
-        android:textSize="11sp"
+        android:text="Tutorial Title"
+        android:textColor="#E0E0E0"
+        android:textSize="12sp"
         android:textStyle="bold"
         android:lineSpacingMultiplier="1.3"
-        android:layout_marginBottom="6dp"/>
+        android:layout_marginBottom="8dp"/>
 
     <!-- Difficulty badge -->
     <TextView
-        android:id="@+id/tv_tut_level"
+        android:id="@+id/tv_tutorial_difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Beginner"
-        android:textColor="@color/orange_neon"
-        android:textSize="9sp"
+        android:textColor="#FF6A00"
+        android:textSize="10sp"
         android:textStyle="bold"
-        android:background="@drawable/bg_badge_orange"
-        android:paddingStart="7dp"
-        android:paddingEnd="7dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"/>
+        android:background="#1AFF6A00"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_marginBottom="4dp"/>
+
+    <!-- Duration -->
+    <TextView
+        android:id="@+id/tv_tutorial_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22 min"
+        android:textColor="#666666"
+        android:textSize="11sp"/>
 
 </LinearLayout>

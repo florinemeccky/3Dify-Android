@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#0A0A0A" android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="24dp">
+
+        <TextView android:id="@+id/tv_back"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="← Back" android:textColor="#FF6A00" android:textSize="14sp"
+            android:clickable="true" android:focusable="true" android:padding="4dp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Settings." android:textColor="#FFFFFF"
+            android:textSize="26sp" android:textStyle="bold" android:layout_marginBottom="28dp"/>
+
+        <!-- Appearance section -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="APPEARANCE" android:textColor="#555555"
+            android:textSize="11sp" android:letterSpacing="0.12" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+            android:background="#111111" android:orientation="horizontal"
+            android:gravity="center_vertical" android:paddingStart="16dp"
+            android:paddingEnd="16dp" android:layout_marginBottom="8dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="🌙  Dark Mode"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_dark_mode"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:checked="true"/>
+        </LinearLayout>
+
+        <!-- Notifications section -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="NOTIFICATIONS" android:textColor="#555555"
+            android:textSize="11sp" android:letterSpacing="0.12"
+            android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+            android:background="#111111" android:orientation="horizontal"
+            android:gravity="center_vertical" android:paddingStart="16dp"
+            android:paddingEnd="16dp" android:layout_marginBottom="8dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="🔔  Daily Reminder"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_notifications"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:checked="true"/>
+        </LinearLayout>
+
+        <!-- Bluetooth section -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="CONNECTIVITY" android:textColor="#555555"
+            android:textSize="11sp" android:letterSpacing="0.12"
+            android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+            android:background="#111111" android:orientation="horizontal"
+            android:gravity="center_vertical" android:paddingStart="16dp"
+            android:paddingEnd="16dp" android:layout_marginBottom="8dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="📶  Bluetooth"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_bluetooth"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Bluetooth status label -->
+        <TextView android:id="@+id/tv_bluetooth_status"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Bluetooth is off"
+            android:textColor="#666666" android:textSize="12sp"
+            android:layout_marginStart="16dp" android:layout_marginBottom="8dp"/>
+
+        <!-- About section -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="ABOUT" android:textColor="#555555"
+            android:textSize="11sp" android:letterSpacing="0.12"
+            android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+            android:background="#111111" android:orientation="horizontal"
+            android:gravity="center_vertical" android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="ℹ️  App Version"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="v1.0.0" android:textColor="#555555" android:textSize="13sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

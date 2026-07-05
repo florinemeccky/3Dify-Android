@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    CATEGORY PILL ITEM
-    ═══════════════════
-    Used in the horizontal RecyclerView in HomeFragment (Categories row)
-    and also as the grid in ExploreFragment.
+    item_category_pill.xml
+    A small pill chip for the horizontal category row on the Home screen.
+    The icon background color is set programmatically in the adapter
+    using the category's colorHex value.
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,36 +12,36 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_marginEnd="10dp"
-    android:padding="10dp"
-    android:background="@drawable/bg_card"
-    android:minWidth="64dp"
+    android:padding="12dp"
+    android:background="#111111"
+    android:minWidth="68dp"
     android:clickable="true"
     android:focusable="true">
 
-    <!-- Icon container -->
+    <!-- Icon container — background color set in Java per category -->
     <LinearLayout
-        android:id="@+id/ll_icon_container"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/bg_icon_orange"
+        android:id="@+id/ll_icon_bg"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:gravity="center"
-        android:layout_marginBottom="6dp">
+        android:layout_marginBottom="6dp"
+        android:background="#1AFF6A00">
 
         <TextView
-            android:id="@+id/tv_cat_icon"
+            android:id="@+id/tv_category_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🔷"
-            android:textSize="16sp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
 
-    <!-- Label -->
+    <!-- Category name -->
     <TextView
-        android:id="@+id/tv_cat_label"
+        android:id="@+id/tv_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Basics"
-        android:textColor="@color/gray_text"
+        android:textColor="#888888"
         android:textSize="10sp"
         android:gravity="center"/>
 

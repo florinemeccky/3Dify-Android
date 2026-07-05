@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    fragment_profile.xml
+    Required IDs:
+      - tv_profile_username  (username from SQLite)
+      - tv_user_email        (email from Firebase)
+      - row_account          (navigates to AccountActivity)
+      - row_settings         (navigates to SettingsActivity)
+      - row_feedback         (navigates to UserFeedbackActivity)
+      - row_reports          (navigates to ReportActivity)
+      - row_help             (navigates to HelpActivity)
+      - row_privacy          (navigates to PrivacyPolicyActivity)
+      - btn_logout           (signs out)
+-->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -17,10 +30,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:paddingTop="20dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="16dp"
+            android:paddingBottom="28dp">
 
-            <!-- Avatar circle -->
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -34,20 +46,30 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_user_email"
+                android:id="@+id/tv_profile_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="user@email.com"
+                android:text="Username"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="email@example.com"
                 android:textColor="#888888"
                 android:textSize="13sp"/>
-
         </LinearLayout>
 
-        <!-- Settings rows -->
+        <!-- Account row -->
         <LinearLayout
+            android:id="@+id/row_account"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:background="#111111"
             android:orientation="horizontal"
             android:gravity="center_vertical"
@@ -56,26 +78,40 @@
             android:layout_marginBottom="8dp"
             android:clickable="true"
             android:focusable="true">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="👤  My Account"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+        <!-- Settings row -->
+        <LinearLayout
+            android:id="@+id/row_settings"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#111111"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="⚙️  Settings"
-                android:textColor="#E0E0E0"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="›"
-                android:textColor="#555555"
-                android:textSize="20sp"/>
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
 
+        <!-- Feedback row -->
         <LinearLayout
+            android:id="@+id/row_feedback"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
             android:background="#111111"
             android:orientation="horizontal"
             android:gravity="center_vertical"
@@ -84,26 +120,103 @@
             android:layout_marginBottom="8dp"
             android:clickable="true"
             android:focusable="true">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="❓  Help &amp; Support"
-                android:textColor="#E0E0E0"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="›"
-                android:textColor="#555555"
-                android:textSize="20sp"/>
+                android:text="⭐  Give Feedback"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
 
+        <!-- Reports row -->
         <LinearLayout
+            android:id="@+id/row_reports"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="52dp"
+            android:background="#111111"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="📊  My Reports"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
+        </LinearLayout>
+
+        <!-- Help row -->
+        <LinearLayout
+            android:id="@+id/row_help"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#111111"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="❓  Help &amp; Support"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
+        </LinearLayout>
+
+        <!-- Contact row -->
+        <LinearLayout
+            android:id="@+id/row_contact"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#111111"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="📞  Contact Us"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
+        </LinearLayout>
+
+        <!-- Complaints row -->
+        <LinearLayout
+            android:id="@+id/row_complaints"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#111111"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⚠️  Submit Complaint"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
+        </LinearLayout>
+
+        <!-- Privacy Policy row -->
+        <LinearLayout
+            android:id="@+id/row_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
             android:background="#111111"
             android:orientation="horizontal"
             android:gravity="center_vertical"
@@ -112,24 +225,15 @@
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:focusable="true">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ℹ️  About 3Dify"
-                android:textColor="#E0E0E0"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="v1.0.0"
-                android:textColor="#555555"
-                android:textSize="13sp"/>
+                android:text="🔒  Privacy Policy"
+                android:textColor="#E0E0E0" android:textSize="14sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
 
-        <!-- Logout button -->
+        <!-- Logout -->
         <LinearLayout
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
@@ -140,7 +244,6 @@
             android:paddingStart="16dp"
             android:clickable="true"
             android:focusable="true">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

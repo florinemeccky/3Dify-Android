@@ -1,73 +1,97 @@
 package com.example.a3dify.adapters;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a3dify.R;
-import com.example.a3dify.models.TutorialModel;
+import com.example.a3dify.models.Tutorial;
 import java.util.List;
 
-public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.TutHolder> {
+/*
+ * TutorialAdapter
+ * Supplies tutorial data to a RecyclerView.
+ * Used in HomeFragment for horizontal featured/recommended rows.
+ *
+ * Each item inflates item_tutorial_card.xml and fills in
+ * the icon, title, difficulty badge, and duration.
+ *
+ * onItemClickListener lets the fragment respond to card taps
+ * without the adapter needing to know about activities.
+ */
+public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.TutorialViewHolder> {
 
-    private final List<TutorialModel> data;
-    private final boolean isCard; // true = horizontal card, false = vertical row
-    private final Activity activity;
+    private final Context         context;
+    private final List<Tutorial>  tutorials;
+    private       OnItemClickListener listener;
 
-    public TutorialAdapter(List<TutorialModel> data, boolean isCard, Activity activity) {
-        this.data     = data;
-        this.isCard   = isCard;
-        this.activity = activity;
+    // Interface so fragments can handle card taps
+    public interface OnItemClickListener {
+        void onItemClick(Tutorial tutorial);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public TutorialAdapter(Context context, List<Tutorial> tutorials) {
+        this.context   = context;
+        this.tutorials = tutorials;
     }
 
     @NonNull
     @Override
-    public TutHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int layout = isCard
-                ? R.layout.item_tutorial_card
-                : R.layout.item_tutorial_row;
-        View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
-        return new TutHolder(v);
+    public TutorialViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.item_tutorial_card, parent, false);
+        return new TutorialViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TutHolder holder, int position) {
-        TutorialModel tut = data.get(position);
+    public void onBindViewHolder(@NonNull TutorialViewHolder holder, int position) {
+        Tutorial tutorial = tutorials.get(position);
 
-        if (holder.tvIcon  != null) holder.tvIcon.setText(tut.icon);
-        if (holder.tvTitle != null) holder.tvTitle.setText(tut.title);
-        if (holder.tvLevel != null) holder.tvLevel.setText(tut.level);
-        if (holder.tvMeta  != null)
-            holder.tvMeta.setText(tut.duration + "  •  " + tut.level);
+        holder.tvIcon.setText(tutorial.getIcon());
+        holder.tvTitle.setText(tutorial.getTitle());
+        holder.tvDifficulty.setText(tutorial.getDifficulty());
+        holder.tvDuration.setText(tutorial.getDuration());
 
+        // Color the difficulty badge based on level
+        int badgeColor;
+        switch (tutorial.getDifficulty()) {
+            case "Intermediate": badgeColor = 0xFF4A90E2; break; // blue
+            case "Advanced":     badgeColor = 0xFF7B5EA7; break; // purple
+            default:             badgeColor = 0xFFFF6A00; break; // orange
+        }
+        holder.tvDifficulty.setTextColor(badgeColor);
+
+        // Notify the fragment when this card is tapped
         holder.itemView.setOnClickListener(v -> {
-            // TODO: pass real data to TutorialDetailActivity
-            // Intent intent = new Intent(activity, TutorialDetailActivity.class);
-            // intent.putExtra("title", tut.title);
-            // activity.startActivity(intent);
+            if (listener != null) {
+                listener.onItemClick(tutorial);
+            }
         });
     }
 
     @Override
-    public int getItemCount() { return data.size(); }
+    public int getItemCount() {
+        return tutorials.size();
+    }
 
-    static class TutHolder extends RecyclerView.ViewHolder {
-        TextView tvIcon, tvTitle, tvLevel, tvMeta;
+    // ViewHolder holds references to each view inside one card
+    static class TutorialViewHolder extends RecyclerView.ViewHolder {
+        TextView     tvIcon, tvTitle, tvDifficulty, tvDuration;
 
-        TutHolder(@NonNull View v) {
-            super(v);
-            tvIcon  = v.findViewById(R.id.tv_tut_icon) != null
-                    ? v.findViewById(R.id.tv_tut_icon)
-                    : v.findViewById(R.id.tv_row_icon);
-            tvTitle = v.findViewById(R.id.tv_tut_title) != null
-                    ? v.findViewById(R.id.tv_tut_title)
-                    : v.findViewById(R.id.tv_row_title);
-            tvLevel = v.findViewById(R.id.tv_tut_level);
-            tvMeta  = v.findViewById(R.id.tv_row_meta);
+        TutorialViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvIcon       = itemView.findViewById(R.id.tv_tutorial_icon);
+            tvTitle      = itemView.findViewById(R.id.tv_tutorial_title);
+            tvDifficulty = itemView.findViewById(R.id.tv_tutorial_difficulty);
+            tvDuration   = itemView.findViewById(R.id.tv_tutorial_duration);
         }
     }
 }
