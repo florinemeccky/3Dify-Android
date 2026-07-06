@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3Dify collects your email address and username at registration, stored securely via Firebase Authentication. Your learning progress, feedback, and settings are stored locally on your device using SQLite."
+            android:text="3Dify collects your email address and username at registration, stored securely via Firebase Authentication. Your learning progress, feedback, and settings are stored on a Cloud database and locally on your device using SQLite."
             android:textColor="#AAAAAA"
             android:textSize="13sp"
             android:lineSpacingMultiplier="1.6"
@@ -138,7 +138,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="For any privacy-related questions, contact us at support@3dify.app or use the Contact Us section inside the app."
+            android:text="For any privacy-related questions, contact us at 0614886685 or use the Contact Us section inside the app."
             android:textColor="#AAAAAA"
             android:textSize="13sp"
             android:lineSpacingMultiplier="1.6"/>
