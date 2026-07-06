@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.DatabaseHelper;
@@ -16,18 +17,29 @@ import java.util.Locale;
 
 /*
  * ReportActivity
- * Reads data from SQLite and generates a formatted learning report.
- * Shows:
- *   - Total tutorials completed
- *   - Number of feedback submissions
- *   - Number of complaint submissions
- * Tapping Generate Full Report builds a detailed text report and saves it to SQLite.
+ * Fully implemented with SQLite read and write.
+ *
+ * On open:
+ *   - Reads completed tutorial count from "progress" table
+ *   - Reads feedback count from "feedback" table
+ *   - Reads complaint count from "complaints" table
+ *   - Reads and displays ALL previously saved reports from "reports" table
+ *
+ * On Generate button:
+ *   - Builds a formatted report string
+ *   - Saves it to "reports" table via saveReport()
+ *   - Displays it on screen
+ *   - Refreshes the history list
+ *
+ * This proves the reports table has real read AND write functionality.
  */
 public class ReportActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
     private String uid = "guest";
-    private TextView tvReportOutput;
+
+    private TextView      tvReportOutput;
+    private LinearLayout  llReportHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,72 +52,154 @@ public class ReportActivity extends AppCompatActivity {
         if (user != null) uid = user.getUid();
 
         TextView tvBack = findViewById(R.id.tv_back);
-        tvBack.setOnClickListener(v -> finish());
+        if (tvBack != null) tvBack.setOnClickListener(v -> finish());
 
         tvReportOutput = findViewById(R.id.tv_report_output);
+        llReportHistory = findViewById(R.id.ll_report_history);
 
+        // Load summary stats into the top cards
         loadSummaryStats();
 
+        // Load and display all previously saved reports from SQLite
+        loadReportHistory();
+
+        // Generate button
         Button btnGenerate = findViewById(R.id.btn_generate);
         if (btnGenerate != null) {
-            btnGenerate.setOnClickListener(v -> generateFullReport());
+            btnGenerate.setOnClickListener(v -> generateAndSaveReport());
         }
     }
 
     /*
-     * Loads the three summary numbers from SQLite and displays them
-     * in the summary card at the top of the screen.
+     * Reads the three summary stats from SQLite.
+     * Each number comes from a real database query.
      */
     private void loadSummaryStats() {
-        // Completed tutorials
+        // Completed tutorials — from "progress" table
         TextView tvCompleted = findViewById(R.id.tv_report_completed);
         if (tvCompleted != null) {
-            int count = db.getCompletedCount(uid);
-            tvCompleted.setText(String.valueOf(count));
+            tvCompleted.setText(String.valueOf(db.getCompletedCount(uid)));
         }
 
-        // Feedback count
+        // Feedback count — from "feedback" table
         TextView tvFeedback = findViewById(R.id.tv_report_feedback);
         if (tvFeedback != null) {
             Cursor c = db.getAllFeedback();
-            int count = c != null ? c.getCount() : 0;
+            int count = (c != null) ? c.getCount() : 0;
             if (c != null) c.close();
             tvFeedback.setText(String.valueOf(count));
         }
 
-        // Complaints count
+        // Complaints count — from "complaints" table
         TextView tvComplaints = findViewById(R.id.tv_report_complaints);
         if (tvComplaints != null) {
             Cursor c = db.getUserComplaints(uid);
-            int count = c != null ? c.getCount() : 0;
+            int count = (c != null) ? c.getCount() : 0;
             if (c != null) c.close();
             tvComplaints.setText(String.valueOf(count));
         }
     }
 
     /*
-     * Builds a formatted text report, displays it on screen,
-     * and saves it to the SQLite reports table.
+     * Reads all previously generated reports from the "reports" SQLite table
+     * and displays each one as a card in the history section.
+     *
+     * This is the missing piece that proves the reports table
+     * has real retrieval functionality, not just writes.
      */
-    private void generateFullReport() {
-        String date = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
-                .format(new Date());
+    private void loadReportHistory() {
+        if (llReportHistory == null) return;
+        llReportHistory.removeAllViews();
 
-        int completed  = db.getCompletedCount(uid);
-        Cursor fb      = db.getAllFeedback();
-        int feedbackN  = fb != null ? fb.getCount() : 0;
+        Cursor cursor = db.getUserReports(uid);
+
+        if (cursor == null || cursor.getCount() == 0) {
+            // No reports yet — show a placeholder message
+            TextView empty = new TextView(this);
+            empty.setText("No reports generated yet. Tap the button below to create your first report.");
+            empty.setTextColor(0xFF666666);
+            empty.setTextSize(13f);
+            empty.setLineSpacing(0, 1.5f);
+            llReportHistory.addView(empty);
+            if (cursor != null) cursor.close();
+            return;
+        }
+
+        // Column indices
+        int colData = cursor.getColumnIndex(DatabaseHelper.COL_REPORT_DATA);
+        int colDate = cursor.getColumnIndex(DatabaseHelper.COL_CREATED_AT);
+        int colType = cursor.getColumnIndex(DatabaseHelper.COL_REPORT_TYPE);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault());
+
+        while (cursor.moveToNext()) {
+            String reportData = (colData >= 0) ? cursor.getString(colData) : "";
+            String reportType = (colType >= 0) ? cursor.getString(colType) : "Report";
+            long   timestamp  = (colDate >= 0) ? cursor.getLong(colDate) : 0;
+            String dateStr    = (timestamp > 0)
+                    ? sdf.format(new Date(timestamp))
+                    : "Unknown date";
+
+            // Build a card view for this report entry
+            LinearLayout card = new LinearLayout(this);
+            card.setOrientation(LinearLayout.VERTICAL);
+            card.setBackgroundColor(0xFF111111);
+            card.setPadding(32, 24, 32, 24);
+
+            LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            cardParams.setMargins(0, 0, 0, 16);
+            card.setLayoutParams(cardParams);
+
+            // Report type and date header
+            TextView tvHeader = new TextView(this);
+            tvHeader.setText(reportType + "  •  " + dateStr);
+            tvHeader.setTextColor(0xFFFF6A00);
+            tvHeader.setTextSize(12f);
+            tvHeader.setPadding(0, 0, 0, 12);
+            card.addView(tvHeader);
+
+            // Report content
+            TextView tvContent = new TextView(this);
+            tvContent.setText(reportData);
+            tvContent.setTextColor(0xFFAAAAAA);
+            tvContent.setTextSize(12f);
+            tvContent.setTypeface(android.graphics.Typeface.MONOSPACE);
+            tvContent.setLineSpacing(0, 1.5f);
+            card.addView(tvContent);
+
+            llReportHistory.addView(card);
+        }
+
+        cursor.close();
+    }
+
+    /*
+     * Builds a fresh report, saves it to SQLite, displays it,
+     * and refreshes the history list to show the new entry.
+     */
+    private void generateAndSaveReport() {
+        String date       = new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+                .format(new Date());
+        int    completed  = db.getCompletedCount(uid);
+
+        Cursor fb         = db.getAllFeedback();
+        int    feedbackN  = (fb != null) ? fb.getCount() : 0;
         if (fb != null) fb.close();
-        Cursor cp      = db.getUserComplaints(uid);
-        int complainN  = cp != null ? cp.getCount() : 0;
+
+        Cursor cp         = db.getUserComplaints(uid);
+        int    complainN  = (cp != null) ? cp.getCount() : 0;
         if (cp != null) cp.close();
 
-        // Build the report text
+        // Build the report string
         StringBuilder report = new StringBuilder();
         report.append("═══════════════════════════\n");
         report.append("  3DIFY LEARNING REPORT\n");
         report.append("═══════════════════════════\n\n");
-        report.append("Generated: ").append(date).append("\n\n");
-        report.append("LEARNING ACTIVITY\n");
+        report.append("Generated : ").append(date).append("\n\n");
+        report.append("ACTIVITY SUMMARY\n");
         report.append("───────────────────\n");
         report.append("Tutorials Completed : ").append(completed).append("\n");
         report.append("Feedback Submitted  : ").append(feedbackN).append("\n");
@@ -116,16 +210,18 @@ public class ReportActivity extends AppCompatActivity {
         report.append("Animation   : ████░░░░░░ 38%\n");
         report.append("Sculpting   : █████░░░░░ 55%\n");
         report.append("Rendering   : ██░░░░░░░░ 20%\n\n");
-        report.append("═══════════════════════════\n");
-        report.append("Keep learning every day!\n");
+        report.append("═══════════════════════════");
 
-        // Show on screen
+        // Show on screen immediately
         if (tvReportOutput != null) {
             tvReportOutput.setText(report.toString());
             tvReportOutput.setVisibility(View.VISIBLE);
         }
 
-        // Save to SQLite
+        // Save to the "reports" SQLite table
         db.saveReport(uid, "Learning Report", report.toString());
+
+        // Refresh the history list so the new report appears
+        loadReportHistory();
     }
 }

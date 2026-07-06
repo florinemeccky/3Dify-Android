@@ -84,7 +84,19 @@
             android:background="@color/background_card" android:padding="16dp"
             android:textColor="#AAAAAA" android:textSize="13sp"
             android:lineSpacingMultiplier="1.6"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- History Title -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="HISTORY"
+            android:textColor="#555555" android:textSize="11sp"
+            android:letterSpacing="0.12" android:layout_marginBottom="16dp"/>
+
+        <!-- History container where SQLite reports are loaded -->
+        <LinearLayout android:id="@+id/ll_report_history"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"/>
 
     </LinearLayout>
 </ScrollView>
