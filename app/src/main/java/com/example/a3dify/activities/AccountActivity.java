@@ -1,5 +1,6 @@
 package com.example.a3dify.activities;
 
+import com.example.a3dify.CloudDatabase;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.DatabaseHelper;
+import com.example.a3dify.CloudDatabase;
 import com.example.a3dify.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,12 +76,18 @@ public class AccountActivity extends AppCompatActivity {
             return;
         }
 
+        // Save to SQLite locally
         boolean saved = db.updateUsername(uid, newUsername);
+
+        // Sync to cloud
+        CloudDatabase.getInstance().updateUsername(uid, newUsername);
+
         if (saved) {
             tvSuccess.setVisibility(View.VISIBLE);
             Toast.makeText(this, "Username updated!", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Could not save. Please try again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Could not save locally. Cloud sync attempted.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

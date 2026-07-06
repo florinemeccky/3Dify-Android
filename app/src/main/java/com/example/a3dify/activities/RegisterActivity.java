@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.DatabaseHelper;
 import com.example.a3dify.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.example.a3dify.CloudDatabase;
 
 /*
  * RegisterActivity
@@ -130,29 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Step 2 — Save username and email to SQLite
                         String uid = mAuth.getCurrentUser().getUid();
-                        boolean saved = dbHelper.saveUserProfile(uid, username, email);
-
-                        setLoadingState(false);
-
-                        if (saved) {
-                            Toast.makeText(this,
-                                    "Welcome to 3Dify, " + username + "!",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Auth worked, SQLite failed — not critical, continue anyway
-                            Toast.makeText(this,
-                                    "Account created! Some profile data may sync later.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // Go to Dashboard — clear back stack so Back doesn't return here
-                        Intent intent = new Intent(RegisterActivity.this, DashboardActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-
+                        saveUserProfile(uid, username, email);
                     } else {
                         setLoadingState(false);
                         String error = task.getException() != null
@@ -161,6 +141,36 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(this, error, Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    /*
+     * Saves the new user profile to both SQLite (local) and
+     * Firebase Realtime Database (cloud) simultaneously.
+     */
+    private void saveUserProfile(String uid, String username, String email) {
+        // 1. Save to SQLite — local device storage
+        DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
+        boolean savedLocally = dbHelper.saveUserProfile(uid, username, email);
+
+        // 2. Save to Firebase Realtime Database — cloud storage
+        CloudDatabase.getInstance().saveUserProfile(uid, username, email);
+
+        setLoadingState(false);
+
+        if (savedLocally) {
+            Toast.makeText(this,
+                    "Welcome to 3Dify, " + username + "!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this,
+                    "Account created! Profile syncing to cloud.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        Intent intent = new Intent(this, DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private void setLoadingState(boolean isLoading) {

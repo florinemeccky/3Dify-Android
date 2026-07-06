@@ -1,5 +1,6 @@
 package com.example.a3dify.activities;
 
+import com.example.a3dify.CloudDatabase;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.DatabaseHelper;
+import com.example.a3dify.CloudDatabase;
 import com.example.a3dify.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -160,13 +162,23 @@ public class TutorialDetailActivity extends AppCompatActivity {
      * After this, the Progress screen completed count will increase by 1.
      */
     private void markAsComplete(String tutorialId) {
+        // Save to SQLite locally
         boolean saved = db.markTutorialComplete(uid, tutorialId);
 
         if (saved) {
+            // Sync completion to cloud
+            CloudDatabase.getInstance().markTutorialComplete(uid, tutorialId);
+
+            // Update the completed count in the cloud user profile
+            int newCount = db.getCompletedCount(uid);
+            CloudDatabase.getInstance().updateCompletedCount(uid, newCount);
+
+            // Update the UI
             tvDoneStatus.setVisibility(View.VISIBLE);
             btnMarkDone.setText("✓   Already Completed");
             btnMarkDone.setEnabled(false);
             btnMarkDone.setAlpha(0.5f);
+
             Toast.makeText(this,
                     "Tutorial marked as complete! Check your Progress tab.",
                     Toast.LENGTH_SHORT).show();

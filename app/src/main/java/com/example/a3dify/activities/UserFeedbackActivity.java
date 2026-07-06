@@ -1,5 +1,6 @@
 package com.example.a3dify.activities;
 
+import com.example.a3dify.CloudDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.DatabaseHelper;
+import com.example.a3dify.CloudDatabase;
 import com.example.a3dify.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,21 +44,25 @@ public class UserFeedbackActivity extends AppCompatActivity {
                 return;
             }
 
-            // Get user UID — use "guest" for non-logged-in users
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user != null ? user.getUid() : "guest";
 
             DatabaseHelper db = DatabaseHelper.getInstance(this);
+
+            // Save to SQLite locally
             boolean saved = db.saveFeedback(uid, feedbackText, rating);
 
+            // Sync to cloud
+            CloudDatabase.getInstance().saveFeedback(uid, feedbackText, rating);
+
             if (saved) {
-                // Hide form, show success message
                 ratingBar.setVisibility(View.GONE);
                 etFeedback.setVisibility(View.GONE);
                 btnSubmit.setVisibility(View.GONE);
                 tvSuccess.setVisibility(View.VISIBLE);
             } else {
-                Toast.makeText(this, "Could not save feedback. Please try again.",
+                Toast.makeText(this,
+                        "Could not save locally. Cloud sync attempted.",
                         Toast.LENGTH_SHORT).show();
             }
         });

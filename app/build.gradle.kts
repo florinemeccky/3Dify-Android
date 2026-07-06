@@ -57,4 +57,7 @@ dependencies {
 
     // Firebase Auth only — free, no billing required
     implementation("com.google.firebase:firebase-auth")
+
+    // Firebase Realtime Database — free tier, no billing required
+    implementation("com.google.firebase:firebase-database")
 }
