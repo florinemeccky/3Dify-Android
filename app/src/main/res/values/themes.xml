@@ -2,43 +2,36 @@
 <resources>
 
     <!--
-        3DIFY DARK THEME (Primary)
-        Based on Material3 DayNight with full dark-mode customization.
+        Base theme — uses DayNight so Android automatically switches
+        between night (dark) and day (light) variants.
+        AppCompatDelegate controls which mode is active.
     -->
     <style name="Theme.3Dify" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-        <!-- Primary brand color (Blender Orange) -->
-        <item name="colorPrimary">@color/orange_primary</item>
-        <item name="colorPrimaryVariant">@color/orange_light</item>
+        <item name="colorPrimary">#FF6A00</item>
+        <item name="colorPrimaryVariant">#FF8C00</item>
         <item name="colorOnPrimary">#000000</item>
-
-        <!-- Secondary -->
-        <item name="colorSecondary">@color/orange_light</item>
-        <item name="colorSecondaryVariant">@color/orange_light</item>
-        <item name="colorOnSecondary">@color/text_primary</item>
-
-        <!-- Background / Surface -->
-        <item name="android:colorBackground">@color/bg_primary</item>
-        <item name="colorSurface">@color/bg_card</item>
-        <item name="colorOnSurface">@color/text_body</item>
-        <item name="colorOnBackground">@color/text_body</item>
-
-        <!-- Status bar and navigation bar -->
-        <item name="android:statusBarColor">@color/bg_primary</item>
-        <item name="android:navigationBarColor">@color/bg_card</item>
+        <item name="colorSecondary">#4A90E2</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSurface">?attr/colorSurface</item>
+        <item name="colorOnSurface">?attr/colorOnSurface</item>
+        <item name="android:statusBarColor">#FF6A00</item>
         <item name="android:windowLightStatusBar">false</item>
-
-        <!-- Ripple -->
-        <item name="colorControlHighlight">#33FF8C42</item>
-
-        <!-- Font family -->
-        <item name="android:fontFamily">monospace</item>
+        <item name="colorControlHighlight">#1AFF6A00</item>
+        <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
     </style>
 
-    <!-- Splash Screen theme — hides status bar, full screen -->
+    <!-- Splash theme -->
     <style name="Theme.3Dify.Splash" parent="Theme.3Dify">
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@color/bg_primary</item>
+        <item name="android:windowBackground">@color/splash_bg</item>
+    </style>
+
+    <!-- Screen slide animation -->
+    <style name="SlideAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
 </resources>

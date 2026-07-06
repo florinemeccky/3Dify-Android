@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#0A0A0A">
+    android:background="@color/background_primary">
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="vertical" android:padding="24dp">
@@ -12,13 +12,20 @@
             android:clickable="true" android:focusable="true"
             android:padding="4dp" android:layout_marginBottom="20dp"/>
 
+        <!-- Orange accent bar — small visual detail that adds personality -->
+        <View
+            android:layout_width="4dp"
+            android:layout_height="32dp"
+            android:background="#FF6A00"
+            android:layout_marginBottom="8dp"/>
+
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Help &amp; Support." android:textColor="#FFFFFF"
+            android:text="Help &amp; Support." android:textColor="@color/text_primary"
             android:textSize="26sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="Frequently asked questions about 3Dify."
-            android:textColor="#888888" android:textSize="14sp" android:layout_marginBottom="28dp"/>
+            android:textColor="@color/text_muted" android:textSize="14sp" android:layout_marginBottom="28dp"/>
 
         <!-- FAQ items -->
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

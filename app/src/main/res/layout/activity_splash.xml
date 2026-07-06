@@ -31,7 +31,7 @@
         android:shadowDy="0"
         android:shadowRadius="20"
         android:text="3Dify"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

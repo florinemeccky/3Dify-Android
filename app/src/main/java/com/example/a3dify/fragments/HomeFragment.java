@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setupGreeting(view);
+        setupMotivationalQuote(view);
         setupContinueLearningBar(view);
         setupCategoryRow(view);
         setupFeaturedTutorials(view);
@@ -96,6 +97,24 @@ public class HomeFragment extends Fragment {
             } else {
                 tvUsername.setText("Guest ✦");
             }
+        }
+    }
+
+    /*
+     * Rotates motivational quotes based on the day of the year.
+     */
+    private void setupMotivationalQuote(View view) {
+        String[] quotes = {
+                "Every expert was once a beginner. Start your lesson today.",
+                "3D mastery is built one tutorial at a time.",
+                "The best render is the one you finish.",
+                "Blender is a tool. Creativity is yours.",
+                "Model something today that did not exist yesterday."
+        };
+        TextView tvQuote = view.findViewById(R.id.tv_quote);
+        if (tvQuote != null) {
+            int dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+            tvQuote.setText(quotes[dayOfYear % quotes.length]);
         }
     }
 

@@ -16,7 +16,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0A0A">
+    android:background="@color/background_primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="Username"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="email@example.com"
-                android:textColor="#888888"
+                android:textColor="@color/text_muted"
                 android:textSize="13sp"/>
         </LinearLayout>
 
@@ -70,7 +70,7 @@
             android:id="@+id/row_account"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -81,7 +81,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="👤  My Account"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -91,7 +91,7 @@
             android:id="@+id/row_settings"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -102,7 +102,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="⚙️  Settings"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -112,7 +112,7 @@
             android:id="@+id/row_feedback"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -123,7 +123,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="⭐  Give Feedback"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -133,7 +133,7 @@
             android:id="@+id/row_reports"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -144,7 +144,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="📊  My Reports"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -154,7 +154,7 @@
             android:id="@+id/row_help"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -165,7 +165,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="❓  Help &amp; Support"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -175,7 +175,7 @@
             android:id="@+id/row_contact"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -186,7 +186,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="📞  Contact Us"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -196,7 +196,7 @@
             android:id="@+id/row_complaints"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -207,7 +207,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="⚠️  Submit Complaint"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>
@@ -217,7 +217,7 @@
             android:id="@+id/row_privacy"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
@@ -228,7 +228,7 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="🔒  Privacy Policy"
-                android:textColor="#E0E0E0" android:textSize="14sp"/>
+                android:textColor="@color/text_secondary" android:textSize="14sp"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="›" android:textColor="#555555" android:textSize="22sp"/>
         </LinearLayout>

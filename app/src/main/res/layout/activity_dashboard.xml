@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0A0A">
+    android:background="@color/background_primary">
 
     <!--
         Offline banner — hidden when internet is available.
@@ -16,7 +16,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="⚠️  No internet connection — some features may be unavailable"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="12sp"
         android:background="#E74C3C"
         android:gravity="center"
@@ -40,7 +40,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="#222222"
+        android:background="@color/border_color"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -50,7 +50,7 @@
         android:id="@+id/bottom_nav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#111111"
+        android:background="@color/background_card"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@drawable/nav_item_color"
         app:itemTextColor="@drawable/nav_item_color"

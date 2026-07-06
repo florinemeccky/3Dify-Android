@@ -17,7 +17,6 @@
     <!-- Theme colors -->
     <color name="orange_primary">#FF6A00</color>
     <color name="orange_light">#FF8C42</color>
-    <color name="text_primary">#FFFFFF</color>
     <color name="text_body">#E0E0E0</color>
     <color name="bg_primary">#0A0A0A</color>
     <color name="bg_card">#111111</color>
@@ -54,6 +53,5 @@
     <color name="text_primary_light">#1A1A1A</color>
     <color name="bg_primary_light">#F5F5F5</color>
     <color name="bg_card_light">#FFFFFF</color>
-    <color name="text_muted">#707070</color>
     <color name="text_gray_light">#999999</color>
 </resources>

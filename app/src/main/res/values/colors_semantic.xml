@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    values/colors.xml additions — light mode (default/day)
+    Applied when light mode is active.
+-->
+<resources>
+    <color name="background_primary">#F5F5F5</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="background_card2">#F0F0F0</color>
+    <color name="text_primary">#0A0A0A</color>
+    <color name="text_secondary">#1A1A1A</color>
+    <color name="text_muted">#666666</color>
+    <color name="text_hint">#AAAAAA</color>
+    <color name="border_color">#E0E0E0</color>
+    <color name="divider_color">#DDDDDD</color>
+    <color name="splash_bg">#FFFFFF</color>
+    <color name="row_bg">#FFFFFF</color>
+    <color name="input_bg">#F0F0F0</color>
+</resources>

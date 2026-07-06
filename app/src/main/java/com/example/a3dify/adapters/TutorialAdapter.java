@@ -67,13 +67,29 @@ public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.Tutori
             case "Advanced":     badgeColor = 0xFF7B5EA7; break; // purple
             default:             badgeColor = 0xFFFF6A00; break; // orange
         }
-        holder.tvDifficulty.setTextColor(badgeColor);
-
-        // Notify the fragment when this card is tapped
         holder.itemView.setOnClickListener(v -> {
+            // Notify the fragment if it has a listener set
             if (listener != null) {
                 listener.onItemClick(tutorial);
             }
+
+            // Also directly launch TutorialDetailActivity with the tutorial data
+            // This works even if no listener is set
+            android.content.Context ctx = holder.itemView.getContext();
+            android.content.Intent intent =
+                    new android.content.Intent(ctx,
+                            com.example.a3dify.activities.TutorialDetailActivity.class);
+
+            intent.putExtra("icon",        tutorial.getIcon());
+            intent.putExtra("title",       tutorial.getTitle());
+            intent.putExtra("category",    tutorial.getCategory());
+            intent.putExtra("difficulty",  tutorial.getDifficulty());
+            intent.putExtra("duration",    tutorial.getDuration());
+            intent.putExtra("description", tutorial.getDescription());
+            // Use title as ID — unique enough for demo purposes
+            intent.putExtra("tutorialId",  tutorial.getTitle().replaceAll("\\s+", "_").toLowerCase());
+
+            ctx.startActivity(intent);
         });
     }
 

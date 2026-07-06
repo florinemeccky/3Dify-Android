@@ -3,17 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0A0A"
+    android:background="@color/background_primary"
     android:orientation="vertical">
+
+    <!-- Orange accent bar — small visual detail that adds personality -->
+    <View
+        android:layout_width="4dp"
+        android:layout_height="32dp"
+        android:background="#FF6A00"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
         android:layout_marginBottom="4dp"
         android:text="Explore."
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="26sp"
         android:textStyle="bold"/>
 
@@ -23,7 +31,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:text="What do you want to master?"
-        android:textColor="#888888"
+        android:textColor="@color/text_muted"
         android:textSize="14sp"/>
 
     <androidx.recyclerview.widget.RecyclerView

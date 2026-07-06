@@ -13,7 +13,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0A0A">
+    android:background="@color/background_primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,11 +24,18 @@
         android:paddingTop="28dp"
         android:paddingBottom="32dp">
 
+        <!-- Orange accent bar — small visual detail that adds personality -->
+        <View
+            android:layout_width="4dp"
+            android:layout_height="32dp"
+            android:background="#FF6A00"
+            android:layout_marginBottom="8dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Progress."
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp"/>
@@ -46,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:background="#111111"
+                android:background="@color/background_card"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="20dp">
@@ -75,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:background="#111111"
+                android:background="@color/background_card"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="20dp">
@@ -113,7 +120,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#111111"
+            android:background="@color/background_card"
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_marginBottom="28dp">
@@ -127,12 +134,12 @@
                     android:orientation="horizontal" android:layout_marginBottom="6dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Modeling"
-                        android:textColor="#E0E0E0" android:textSize="13sp"/>
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="72%" android:textColor="#FF6A00" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
-                    android:background="#222222">
+                    android:background="@color/border_color">
                     <View android:id="@+id/bar_modeling" android:layout_width="0dp"
                         android:layout_height="6dp" android:background="#FF6A00"/>
                 </FrameLayout>
@@ -147,12 +154,12 @@
                     android:orientation="horizontal" android:layout_marginBottom="6dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Animation"
-                        android:textColor="#E0E0E0" android:textSize="13sp"/>
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="38%" android:textColor="#7B5EA7" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
-                    android:background="#222222">
+                    android:background="@color/border_color">
                     <View android:id="@+id/bar_animation" android:layout_width="0dp"
                         android:layout_height="6dp" android:background="#7B5EA7"/>
                 </FrameLayout>
@@ -167,12 +174,12 @@
                     android:orientation="horizontal" android:layout_marginBottom="6dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Sculpting"
-                        android:textColor="#E0E0E0" android:textSize="13sp"/>
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="55%" android:textColor="#4A90E2" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
-                    android:background="#222222">
+                    android:background="@color/border_color">
                     <View android:id="@+id/bar_sculpting" android:layout_width="0dp"
                         android:layout_height="6dp" android:background="#4A90E2"/>
                 </FrameLayout>
@@ -187,12 +194,12 @@
                     android:orientation="horizontal" android:layout_marginBottom="6dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Rendering"
-                        android:textColor="#E0E0E0" android:textSize="13sp"/>
+                        android:textColor="@color/text_secondary" android:textSize="13sp"/>
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="20%" android:textColor="#F4D03F" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
-                    android:background="#222222">
+                    android:background="@color/border_color">
                     <View android:id="@+id/bar_rendering" android:layout_width="0dp"
                         android:layout_height="6dp" android:background="#F4D03F"/>
                 </FrameLayout>
@@ -223,7 +230,7 @@
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="🏆" android:textSize="28sp"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="First Tutorial" android:textColor="#888888"
+                    android:text="First Tutorial" android:textColor="@color/text_muted"
                     android:textSize="11sp" android:gravity="center" android:layout_marginTop="6dp"/>
             </LinearLayout>
 
@@ -234,10 +241,37 @@
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="🔥" android:textSize="28sp"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="7 Day Streak" android:textColor="#888888"
+                    android:text="7 Day Streak" android:textColor="@color/text_muted"
                     android:textSize="11sp" android:gravity="center" android:layout_marginTop="6dp"/>
             </LinearLayout>
 
+        </LinearLayout>
+
+        <!-- Streak encouragement card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111111"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎯  Keep Going"
+                android:textColor="#FF6A00"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Complete one tutorial today to maintain your streak and unlock the 3D Modeler achievement."
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:lineSpacingMultiplier="1.5"/>
         </LinearLayout>
 
     </LinearLayout>

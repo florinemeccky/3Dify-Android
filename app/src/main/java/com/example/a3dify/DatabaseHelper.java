@@ -278,6 +278,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Checks whether a specific tutorial has been marked complete by a user.
+     * Used by TutorialDetailActivity to show the completed badge on screen open.
+     *
+     * @param uid        Firebase UID of the user
+     * @param tutorialId The tutorial's unique ID string
+     * @return true if a completed record exists for this user + tutorial combination
+     */
+    public boolean isTutorialCompleted(String uid, String tutorialId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(*) FROM " + TABLE_PROGRESS +
+                        " WHERE " + COL_UID + " = ? " +
+                        " AND " + COL_TUTORIAL_ID + " = ? " +
+                        " AND " + COL_COMPLETED + " = 1",
+                new String[]{uid, tutorialId}
+        );
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count > 0;
+    }
+
+    /**
      * Returns the number of tutorials a user has completed.
      * Used on the Progress screen to show the completed count.
      */

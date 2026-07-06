@@ -1,6 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_primary">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Back arrow -->
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back"
+            android:textColor="#FF6A00"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="4dp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Orange accent bar — small visual detail that adds personality -->
+        <View
+            android:layout_width="4dp"
+            android:layout_height="32dp"
+            android:background="#FF6A00"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy."
+            android:textColor="@color/text_primary"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last updated: January 2025"
+            android:textColor="#555555"
+            android:textSize="12sp"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- Section 1 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Data We Collect"
+            android:textColor="#FF6A00"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3Dify collects your email address and username at registration, stored securely via Firebase Authentication. Your learning progress, feedback, and settings are stored locally on your device using SQLite."
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Section 2 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. How We Use Your Data"
+            android:textColor="#FF6A00"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your data is used solely to provide the 3Dify learning experience. We do not sell, share, or transfer your personal data to third parties for marketing purposes."
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Section 3 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Data Security"
+            android:textColor="#FF6A00"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Authentication is handled by Google Firebase, which uses industry-standard encryption. Local data is stored in a private SQLite database that is not accessible to other applications on your device."
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Section 4 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4. Your Rights"
+            android:textColor="#FF6A00"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You may delete your account at any time by contacting support. Deleting the app removes all locally stored data from your device immediately."
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.6"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Section 5 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. Contact"
+            android:textColor="#FF6A00"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="For any privacy-related questions, contact us at support@3dify.app or use the Contact Us section inside the app."
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.6"/>
+
+    </LinearLayout>
+</ScrollView>
