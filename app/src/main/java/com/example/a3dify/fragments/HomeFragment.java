@@ -1,10 +1,17 @@
 package com.example.a3dify.fragments;
 
 import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +20,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.a3dify.DatabaseHelper;
 import com.example.a3dify.R;
+import com.example.a3dify.TutorialRepository;
+import com.example.a3dify.activities.AllTutorialsActivity;
+import com.example.a3dify.activities.NotificationsActivity;
+import com.example.a3dify.activities.TutorialDetailActivity;
 import com.example.a3dify.adapters.CategoryAdapter;
 import com.example.a3dify.adapters.TutorialAdapter;
 import com.example.a3dify.models.Category;
@@ -23,19 +34,26 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/*
- * HomeFragment
- * The main dashboard screen shown after login.
- *
- * Shows:
- *   - Time-based greeting with the user's username from SQLite
- *   - Continue Learning card with animated progress bar
- *   - Horizontal category pill row
- *   - Horizontal featured tutorial card row
- */
 public class HomeFragment extends Fragment {
 
-    private RecyclerView rvCategories, rvFeatured;
+    private TutorialAdapter  featuredAdapter;
+    private TutorialRepository repo;
+    private RecyclerView     rvFeatured;
+    private TextView         tvNoResults;
+    private String           selectedCategory = "All";
+
+    // Category names matching TutorialRepository exactly
+    private static final String[] CATEGORY_NAMES = {
+        "All", "Beginner Basics", "3D Modeling", "Animation",
+        "Sculpting", "Rendering", "Geometry Nodes", "Materials & Textures"
+    };
+    private static final String[] CATEGORY_ICONS = {
+        "⭐", "🔷", "🧊", "🎬", "🌊", "💡", "⚙️", "🎨"
+    };
+    private static final String[] CATEGORY_COLORS = {
+        "#FF6A00", "#4A90E2", "#FF6A00", "#7B5EA7",
+        "#2ECC71", "#F4D03F", "#E74C3C", "#9B59B6"
+    };
 
     @Nullable
     @Override
@@ -46,26 +64,25 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view,
+                              @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        repo = TutorialRepository.getInstance();
 
         setupGreeting(view);
-        setupMotivationalQuote(view);
-        setupContinueLearningBar(view);
+        setupSearch(view);
+        setupContinueLearning(view);
         setupCategoryRow(view);
         setupFeaturedTutorials(view);
+        setupSeeAll(view);
+        setupNotificationBell(view);
     }
 
-    /*
-     * Sets the greeting text based on current hour.
-     * Then loads the username from SQLite using the Firebase UID.
-     * Falls back to the email prefix if SQLite has no record yet.
-     */
+    // ── Greeting ──────────────────────────────────────────────────
     private void setupGreeting(View view) {
-        TextView tvGreeting  = view.findViewById(R.id.tv_greeting_label);
-        TextView tvUsername  = view.findViewById(R.id.tv_username);
+        TextView tvGreeting = view.findViewById(R.id.tv_greeting_label);
+        TextView tvUsername = view.findViewById(R.id.tv_username);
 
-        // Time-based greeting
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (tvGreeting != null) {
             if (hour < 12)      tvGreeting.setText("Good morning,");
@@ -73,23 +90,16 @@ public class HomeFragment extends Fragment {
             else                tvGreeting.setText("Good evening,");
         }
 
-        // Load username from SQLite
         if (tvUsername != null) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
-                String uid = user.getUid();
                 DatabaseHelper db = DatabaseHelper.getInstance(requireContext());
-                android.database.Cursor cursor = db.getUserProfile(uid);
-
+                Cursor cursor = db.getUserProfile(user.getUid());
                 if (cursor != null && cursor.moveToFirst()) {
                     int col = cursor.getColumnIndex(DatabaseHelper.COL_USERNAME);
-                    if (col >= 0) {
-                        String username = cursor.getString(col);
-                        tvUsername.setText(username + " ✦");
-                    }
+                    if (col >= 0) tvUsername.setText(cursor.getString(col) + " ✦");
                     cursor.close();
                 } else {
-                    // No SQLite record — use email prefix as fallback
                     String email = user.getEmail() != null ? user.getEmail() : "";
                     String name  = email.contains("@") ? email.split("@")[0] : "Learner";
                     tvUsername.setText(name + " ✦");
@@ -98,116 +108,222 @@ public class HomeFragment extends Fragment {
                 tvUsername.setText("Guest ✦");
             }
         }
-    }
 
-    /*
-     * Rotates motivational quotes based on the day of the year.
-     */
-    private void setupMotivationalQuote(View view) {
-        String[] quotes = {
+        // Rotating motivational quote
+        TextView tvQuote = view.findViewById(R.id.tv_quote);
+        if (tvQuote != null) {
+            String[] quotes = {
                 "Every expert was once a beginner. Start your lesson today.",
                 "3D mastery is built one tutorial at a time.",
                 "The best render is the one you finish.",
                 "Blender is a tool. Creativity is yours.",
                 "Model something today that did not exist yesterday."
-        };
-        TextView tvQuote = view.findViewById(R.id.tv_quote);
-        if (tvQuote != null) {
-            int dayOfYear = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
-            tvQuote.setText(quotes[dayOfYear % quotes.length]);
+            };
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
+            tvQuote.setText(quotes[day % quotes.length]);
+        }
+    }
+
+    // ── Real search bar ───────────────────────────────────────────
+    private void setupSearch(View view) {
+        EditText etSearch = view.findViewById(R.id.et_search);
+        tvNoResults = view.findViewById(R.id.tv_no_results);
+
+        if (etSearch == null) return;
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterTutorials(s.toString(), selectedCategory);
+            }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    /*
+     * Filters the featured tutorials list based on search text
+     * AND the currently selected category.
+     * Shows a "no results" message if nothing matches.
+     */
+    private void filterTutorials(String query, String category) {
+        List<Tutorial> base = category.equals("All")
+            ? repo.getAll()
+            : repo.getByCategory(category);
+
+        List<Tutorial> filtered = new ArrayList<>();
+        String lower = query.toLowerCase().trim();
+        for (Tutorial t : base) {
+            if (lower.isEmpty()
+                || t.getTitle().toLowerCase().contains(lower)
+                || t.getCategory().toLowerCase().contains(lower)
+                || t.getDifficulty().toLowerCase().contains(lower)) {
+                filtered.add(t);
+            }
+        }
+
+        if (featuredAdapter != null) {
+            featuredAdapter.updateList(filtered);
+        }
+
+        if (tvNoResults != null) {
+            tvNoResults.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    // ── Continue Learning ─────────────────────────────────────────
+    private void setupContinueLearning(View view) {
+        LinearLayout cardContinue   = view.findViewById(R.id.card_continue);
+        TextView     tvContinueTitle = view.findViewById(R.id.tv_continue_title);
+        TextView     tvContinueLesson = view.findViewById(R.id.tv_continue_lesson);
+        View         progressFill   = view.findViewById(R.id.view_progress_fill);
+
+        // Read last-viewed tutorial from SharedPreferences
+        SharedPreferences prefs = requireContext()
+            .getSharedPreferences("continue_learning", requireContext().MODE_PRIVATE);
+        String lastId    = prefs.getString("last_tutorial_id", null);
+        String lastTitle = prefs.getString("last_tutorial_title", null);
+
+        Tutorial target;
+        if (lastId != null) {
+            target = repo.findById(lastId);
+        } else {
+            target = repo.getBeginnerDefault();
+        }
+
+        final Tutorial finalTarget = (target != null) ? target : repo.getBeginnerDefault();
+
+        if (tvContinueTitle != null) {
+            tvContinueTitle.setText(finalTarget.getTitle());
+        }
+        if (tvContinueLesson != null) {
+            tvContinueLesson.setText(lastId != null
+                ? "Continue where you left off"
+                : "Start here — recommended for beginners");
+        }
+
+        // Animate progress bar
+        if (progressFill != null) {
+            progressFill.post(() -> {
+                View track = (View) progressFill.getParent();
+                int trackWidth  = track.getWidth();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                int completed = 0;
+                if (user != null) {
+                    completed = DatabaseHelper.getInstance(requireContext())
+                        .getCompletedCount(user.getUid());
+                }
+                // Show 0–100% based on completed count (capped at 20 tutorials)
+                float pct = Math.min(completed / 20f, 1.0f);
+                int targetWidth = (int) (trackWidth * pct);
+
+                ValueAnimator animator = ValueAnimator.ofInt(0, Math.max(targetWidth, 1));
+                animator.setDuration(900);
+                animator.setStartDelay(300);
+                animator.addUpdateListener(anim -> {
+                    ViewGroup.LayoutParams p = progressFill.getLayoutParams();
+                    p.width = (int) anim.getAnimatedValue();
+                    progressFill.setLayoutParams(p);
+                });
+                animator.start();
+            });
+        }
+
+        // Tapping the card opens that tutorial
+        if (cardContinue != null) {
+            cardContinue.setOnClickListener(v -> openTutorial(finalTarget));
+        }
+    }
+
+    // ── Category pills ────────────────────────────────────────────
+    private void setupCategoryRow(View view) {
+        RecyclerView rvCats = view.findViewById(R.id.rv_categories);
+        if (rvCats == null) return;
+
+        rvCats.setLayoutManager(
+            new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        List<Category> cats = new ArrayList<>();
+        for (int i = 0; i < CATEGORY_NAMES.length; i++) {
+            int count = CATEGORY_NAMES[i].equals("All")
+                ? repo.getAll().size()
+                : repo.getByCategory(CATEGORY_NAMES[i]).size();
+            cats.add(new Category(
+                CATEGORY_ICONS[i],
+                CATEGORY_NAMES[i],
+                count,
+                CATEGORY_COLORS[i],
+                ""
+            ));
+        }
+
+        CategoryAdapter adapter = new CategoryAdapter(getContext(), cats, false);
+        adapter.setOnItemClickListener(cat -> {
+            selectedCategory = cat.getName();
+            adapter.setSelectedCategory(selectedCategory);
+
+            // Get current search text
+            EditText etSearch = view.findViewById(R.id.et_search);
+            String query = etSearch != null ? etSearch.getText().toString() : "";
+            filterTutorials(query, selectedCategory);
+        });
+        rvCats.setAdapter(adapter);
+    }
+
+    // ── Featured tutorials ────────────────────────────────────────
+    private void setupFeaturedTutorials(View view) {
+        rvFeatured = view.findViewById(R.id.rv_featured);
+        tvNoResults = view.findViewById(R.id.tv_no_results);
+        if (rvFeatured == null) return;
+
+        rvFeatured.setLayoutManager(
+            new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        featuredAdapter = new TutorialAdapter(getContext(), repo.getAll());
+        featuredAdapter.setOnItemClickListener(this::openTutorial);
+        rvFeatured.setAdapter(featuredAdapter);
+    }
+
+    // ── See All ───────────────────────────────────────────────────
+    private void setupSeeAll(View view) {
+        TextView tvSeeAll = view.findViewById(R.id.tv_see_all);
+        if (tvSeeAll != null) {
+            tvSeeAll.setOnClickListener(v ->
+                startActivity(new Intent(requireActivity(), AllTutorialsActivity.class))
+            );
+        }
+    }
+
+    // ── Notification bell ─────────────────────────────────────────
+    private void setupNotificationBell(View view) {
+        View bellContainer = view.findViewById(R.id.btn_notif);
+        if (bellContainer != null) {
+            bellContainer.setOnClickListener(v ->
+                startActivity(new Intent(requireActivity(), NotificationsActivity.class))
+            );
         }
     }
 
     /*
-     * Animates the orange progress bar from 0 to 67% width.
-     * Uses ValueAnimator so the bar slides in smoothly when
-     * the Home tab is opened rather than jumping to the final value.
+     * Opens TutorialDetailActivity for the given tutorial.
+     * Also saves it as the last-viewed tutorial for Continue Learning.
      */
-    private void setupContinueLearningBar(View view) {
-        View progressFill = view.findViewById(R.id.view_progress_fill);
-        if (progressFill == null) return;
+    private void openTutorial(Tutorial tutorial) {
+        // Save as last viewed
+        requireContext()
+            .getSharedPreferences("continue_learning", requireContext().MODE_PRIVATE)
+            .edit()
+            .putString("last_tutorial_id",    tutorial.getTutorialId())
+            .putString("last_tutorial_title", tutorial.getTitle())
+            .apply();
 
-        progressFill.post(() -> {
-            // Get the width of the parent track
-            View track = (View) progressFill.getParent();
-            int trackWidth = track.getWidth();
-            int targetWidth = (int) (trackWidth * 0.67f);
-
-            ValueAnimator animator = ValueAnimator.ofInt(0, targetWidth);
-            animator.setDuration(900);
-            animator.setStartDelay(300);
-            animator.addUpdateListener(anim -> {
-                ViewGroup.LayoutParams params = progressFill.getLayoutParams();
-                params.width = (int) anim.getAnimatedValue();
-                progressFill.setLayoutParams(params);
-            });
-            animator.start();
-        });
-    }
-
-    /*
-     * Sets up the horizontal category pill RecyclerView.
-     * Uses CategoryAdapter in pill mode (useRowLayout = false).
-     */
-    private void setupCategoryRow(View view) {
-        rvCategories = view.findViewById(R.id.rv_categories);
-        if (rvCategories == null) return;
-
-        rvCategories.setLayoutManager(
-                new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
-        );
-        rvCategories.setAdapter(new CategoryAdapter(getContext(), getCategories(), false));
-    }
-
-    /*
-     * Sets up the horizontal featured tutorial RecyclerView.
-     * Uses TutorialAdapter.
-     */
-    private void setupFeaturedTutorials(View view) {
-        rvFeatured = view.findViewById(R.id.rv_featured);
-        if (rvFeatured == null) return;
-
-        rvFeatured.setLayoutManager(
-                new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
-        );
-
-        TutorialAdapter adapter = new TutorialAdapter(getContext(), getTutorials());
-        adapter.setOnItemClickListener(tutorial -> {
-            // TODO Phase 5: open TutorialDetailActivity with this tutorial's data
-        });
-        rvFeatured.setAdapter(adapter);
-    }
-
-    // Sample categories — in a real app these would come from a database
-    private List<Category> getCategories() {
-        List<Category> list = new ArrayList<>();
-        list.add(new Category("🔷", "Basics",   24, "#4A90E2", "Beginner"));
-        list.add(new Category("🧊", "Modeling", 38, "#FF6A00", "All levels"));
-        list.add(new Category("🎬", "Animate",  19, "#7B5EA7", "Intermediate"));
-        list.add(new Category("🌊", "Sculpt",   15, "#2ECC71", "Intermediate"));
-        list.add(new Category("💡", "Render",   22, "#F4D03F", "Advanced"));
-        list.add(new Category("⚙️", "Nodes",    12, "#E74C3C", "Advanced"));
-        return list;
-    }
-
-    // Sample tutorials — in a real app these would come from SQLite or an API
-    private List<Tutorial> getTutorials() {
-        List<Tutorial> list = new ArrayList<>();
-        list.add(new Tutorial("🧊", "Intro to 3D Modeling",
-                "Modeling", "Beginner", "28 min",
-                "Learn the fundamental tools and viewport navigation in Blender."));
-        list.add(new Tutorial("🌊", "Sculpting Basics",
-                "Sculpting", "Beginner", "22 min",
-                "Explore the sculpt mode brushes and dynamic topology."));
-        list.add(new Tutorial("⚙️", "Geometry Nodes",
-                "Nodes", "Intermediate", "45 min",
-                "Build procedural models using Blender's node-based system."));
-        list.add(new Tutorial("🎨", "PBR Materials",
-                "Materials", "Intermediate", "35 min",
-                "Create physically based render materials with the node editor."));
-        list.add(new Tutorial("💡", "Lighting Setups",
-                "Rendering", "Beginner", "18 min",
-                "Three-point lighting, HDRI environments, and light linking."));
-        return list;
+        Intent intent = new Intent(requireActivity(), TutorialDetailActivity.class);
+        intent.putExtra("icon",        tutorial.getIcon());
+        intent.putExtra("title",       tutorial.getTitle());
+        intent.putExtra("category",    tutorial.getCategory());
+        intent.putExtra("difficulty",  tutorial.getDifficulty());
+        intent.putExtra("duration",    tutorial.getDuration());
+        intent.putExtra("description", tutorial.getDescription());
+        intent.putExtra("tutorialId",  tutorial.getTutorialId());
+        startActivity(intent);
     }
 }

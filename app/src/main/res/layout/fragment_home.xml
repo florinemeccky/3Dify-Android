@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    fragment_home.xml
-    Home tab layout. Uses NestedScrollView so all sections
-    scroll together. RecyclerViews inside scroll horizontally.
-
-    Required IDs for HomeFragment.java:
-      - tv_greeting_label   (time-based greeting)
-      - tv_username         (user's name from SQLite)
-      - view_progress_fill  (orange bar inside continue learning card)
-      - rv_categories       (horizontal category pills)
-      - rv_featured         (horizontal tutorial cards)
--->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -59,6 +47,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_notif"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="#1AFF6A00"
@@ -73,19 +62,18 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ══ SEARCH BAR ══ -->
+        <!-- Real search bar with EditText -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/background_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingStart="14dp"
-            android:clickable="true"
-            android:focusable="true">
+            android:paddingEnd="14dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,13 +82,34 @@
                 android:textSize="15sp"
                 android:layout_marginEnd="10dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search tutorials…"
-                android:textColor="@color/text_hint"
-                android:textSize="14sp"/>
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Search tutorials…"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="14sp"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"/>
         </LinearLayout>
+
+        <!-- No results message — hidden until search returns nothing -->
+        <TextView
+            android:id="@+id/tv_no_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:text="No tutorials found. Try a different search."
+            android:textColor="@color/text_muted"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:visibility="gone"/>
 
         <!-- Daily motivation card -->
         <LinearLayout
@@ -114,7 +123,6 @@
             android:gravity="center_vertical"
             android:padding="14dp">
 
-            <!-- Orange left accent line -->
             <View
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
@@ -146,6 +154,7 @@
 
         <!-- ══ CONTINUE LEARNING CARD ══ -->
         <LinearLayout
+            android:id="@+id/card_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -184,6 +193,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_continue_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Intro to 3D Modeling"
@@ -192,9 +202,10 @@
                         android:textStyle="bold"/>
 
                     <TextView
+                        android:id="@+id/tv_continue_lesson"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lesson 4 of 12"
+                        android:text="Continue where you left off"
                         android:textColor="#555555"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp"/>
@@ -214,7 +225,6 @@
                     android:paddingBottom="3dp"/>
             </LinearLayout>
 
-            <!-- Progress bar track and animated fill -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
@@ -239,7 +249,6 @@
             android:textSize="11sp"
             android:letterSpacing="0.12"/>
 
-        <!-- ══ CATEGORIES HORIZONTAL RECYCLER ══ -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_categories"
             android:layout_width="match_parent"
@@ -270,6 +279,7 @@
                 android:letterSpacing="0.12"/>
 
             <TextView
+                android:id="@+id/tv_see_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="See all →"
@@ -279,7 +289,8 @@
                 android:focusable="true"/>
         </LinearLayout>
 
-        <!-- ══ FEATURED TUTORIALS HORIZONTAL RECYCLER ══ -->
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_featured"
             android:layout_width="match_parent"

@@ -49,6 +49,7 @@
 
             <!-- Completed tutorials stat -->
             <LinearLayout
+                android:id="@+id/card_completed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -56,7 +57,9 @@
                 android:background="@color/background_card"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:id="@+id/tv_completed_count"
@@ -78,6 +81,7 @@
 
             <!-- Day streak stat -->
             <LinearLayout
+                android:id="@+id/card_streak"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -85,7 +89,9 @@
                 android:background="@color/background_card"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="20dp">
+                android:padding="20dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:id="@+id/tv_streak_count"
@@ -135,8 +141,9 @@
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Modeling"
                         android:textColor="@color/text_secondary" android:textSize="13sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="72%" android:textColor="#FF6A00" android:textSize="13sp"/>
+                    <TextView android:id="@+id/tv_skill_modeling_pct"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="0%" android:textColor="#FF6A00" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
                     android:background="@color/border_color">
@@ -155,8 +162,9 @@
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Animation"
                         android:textColor="@color/text_secondary" android:textSize="13sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="38%" android:textColor="#7B5EA7" android:textSize="13sp"/>
+                    <TextView android:id="@+id/tv_skill_animation_pct"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="0%" android:textColor="#7B5EA7" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
                     android:background="@color/border_color">
@@ -175,8 +183,9 @@
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Sculpting"
                         android:textColor="@color/text_secondary" android:textSize="13sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="55%" android:textColor="#4A90E2" android:textSize="13sp"/>
+                    <TextView android:id="@+id/tv_skill_sculpting_pct"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="0%" android:textColor="#4A90E2" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
                     android:background="@color/border_color">
@@ -195,8 +204,9 @@
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:text="Rendering"
                         android:textColor="@color/text_secondary" android:textSize="13sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="20%" android:textColor="#F4D03F" android:textSize="13sp"/>
+                    <TextView android:id="@+id/tv_skill_rendering_pct"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="0%" android:textColor="#F4D03F" android:textSize="13sp"/>
                 </LinearLayout>
                 <FrameLayout android:layout_width="match_parent" android:layout_height="6dp"
                     android:background="@color/border_color">

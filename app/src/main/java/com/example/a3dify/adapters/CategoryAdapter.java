@@ -28,6 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private final List<Category> categories;
     private final boolean        useRowLayout;
     private       OnItemClickListener listener;
+    private       String              selectedCategory = "All";
 
     public interface OnItemClickListener {
         void onItemClick(Category category);
@@ -35,6 +36,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setSelectedCategory(String categoryName) {
+        this.selectedCategory = categoryName;
+        notifyDataSetChanged();
     }
 
     public CategoryAdapter(Context context, List<Category> categories, boolean useRowLayout) {
@@ -62,24 +68,48 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.tvIcon.setText(cat.getIcon());
         holder.tvName.setText(cat.getName());
 
-        // Parse the category color and create a 15% opacity version for backgrounds
+        boolean isSelected = cat.getName().equals(selectedCategory);
+
+        // Parse the category color
         try {
-            int color    = Color.parseColor(cat.getColorHex());
-            int dimColor = Color.argb(
-                    38,                   // 15% opacity
-                    Color.red(color),
-                    Color.green(color),
-                    Color.blue(color)
-            );
-            if (holder.llIconBg != null) {
-                holder.llIconBg.setBackgroundColor(dimColor);
-            }
-            if (holder.tvDifficulty != null) {
-                holder.tvDifficulty.setTextColor(color);
-                holder.tvDifficulty.setBackgroundColor(dimColor);
+            int color = Color.parseColor(cat.getColorHex());
+            
+            if (!useRowLayout) {
+                // Pill style selection
+                if (isSelected) {
+                    holder.itemView.setBackgroundResource(R.drawable.bg_category_pill_selected);
+                    holder.tvName.setTextColor(Color.WHITE);
+                    if (holder.llIconBg != null) {
+                        holder.llIconBg.setBackgroundColor(Color.parseColor("#33FFFFFF"));
+                    }
+                } else {
+                    holder.itemView.setBackgroundResource(R.drawable.bg_category_pill);
+                    holder.tvName.setTextColor(context.getResources().getColor(R.color.text_primary));
+                    int dimColor = Color.argb(38, Color.red(color), Color.green(color), Color.blue(color));
+                    if (holder.llIconBg != null) {
+                        holder.llIconBg.setBackgroundColor(dimColor);
+                    }
+                }
+            } else {
+                // Row style (Explore tab)
+                int dimColor = Color.argb(38, Color.red(color), Color.green(color), Color.blue(color));
+                if (holder.llIconBg != null) {
+                    holder.llIconBg.setBackgroundColor(dimColor);
+                }
+                if (holder.tvDifficulty != null) {
+                    holder.tvDifficulty.setTextColor(color);
+                    holder.tvDifficulty.setBackgroundColor(dimColor);
+                }
             }
         } catch (IllegalArgumentException ignored) {
-            // If color parsing fails, leave the default orange
+        }
+
+        // Highlight selected category with orange border (Applied to all items)
+        holder.itemView.setAlpha(isSelected ? 1.0f : 0.7f);
+        if (holder.tvName != null) {
+            holder.tvName.setTextColor(isSelected
+                    ? 0xFFFF6A00
+                    : 0xFF888888);
         }
 
         // Fill row-only fields

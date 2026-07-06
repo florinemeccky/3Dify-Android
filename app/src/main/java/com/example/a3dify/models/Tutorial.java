@@ -2,16 +2,9 @@ package com.example.a3dify.models;
 
 /*
  * Tutorial
- * A simple data model representing one tutorial in the app.
- * Used by TutorialAdapter to populate RecyclerView cards.
- *
- * Fields:
- *   icon        — emoji shown on the thumbnail e.g. "🧊"
- *   title       — the tutorial name
- *   category    — which category it belongs to e.g. "Modeling"
- *   difficulty  — "Beginner", "Intermediate", or "Advanced"
- *   duration    — how long it takes e.g. "22 min"
- *   description — longer text shown on the detail screen
+ * Data model for one tutorial.
+ * tutorialId is a stable unique string used for SQLite progress tracking,
+ * SharedPreferences notes, and Continue Learning last-viewed tracking.
  */
 public class Tutorial {
 
@@ -21,23 +14,27 @@ public class Tutorial {
     private String difficulty;
     private String duration;
     private String description;
+    private String tutorialId;
 
-    // Constructor — used when creating tutorial objects in fragments
+    // Full constructor including tutorialId
     public Tutorial(String icon, String title, String category,
-                    String difficulty, String duration, String description) {
-        this.icon        = icon;
-        this.title       = title;
-        this.category    = category;
-        this.difficulty  = difficulty;
-        this.duration    = duration;
+                    String difficulty, String duration,
+                    String description, String tutorialId) {
+        this.icon       = icon;
+        this.title      = title;
+        this.category   = category;
+        this.difficulty = difficulty;
+        this.duration   = duration;
         this.description = description;
+        this.tutorialId = tutorialId;
     }
 
-    // Getters — used by the adapter to read values
+    // Getters
     public String getIcon()        { return icon; }
     public String getTitle()       { return title; }
     public String getCategory()    { return category; }
     public String getDifficulty()  { return difficulty; }
     public String getDuration()    { return duration; }
     public String getDescription() { return description; }
+    public String getTutorialId()  { return tutorialId; }
 }

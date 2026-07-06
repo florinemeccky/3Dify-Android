@@ -25,8 +25,8 @@ import java.util.List;
  */
 public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.TutorialViewHolder> {
 
-    private final Context         context;
-    private final List<Tutorial>  tutorials;
+    private final Context        context;
+    private       List<Tutorial> tutorials;
     private       OnItemClickListener listener;
 
     // Interface so fragments can handle card taps
@@ -38,9 +38,19 @@ public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.Tutori
         this.listener = listener;
     }
 
+    /*
+     * Updates the list and refreshes the RecyclerView.
+     * Called by search filtering in HomeFragment and AllTutorialsActivity.
+     */
+    public void updateList(List<Tutorial> newList) {
+        this.tutorials.clear();
+        this.tutorials.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     public TutorialAdapter(Context context, List<Tutorial> tutorials) {
         this.context   = context;
-        this.tutorials = tutorials;
+        this.tutorials = new java.util.ArrayList<>(tutorials);
     }
 
     @NonNull
