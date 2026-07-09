@@ -36,10 +36,11 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    private long lastClickTime = 0;
     private TutorialAdapter  featuredAdapter;
     private TutorialRepository repo;
     private RecyclerView     rvFeatured;
-    private TextView         tvNoResults;
+    private View             llNoResults;
     private String           selectedCategory = "All";
 
     // Category names matching TutorialRepository exactly
@@ -76,6 +77,18 @@ public class HomeFragment extends Fragment {
         setupFeaturedTutorials(view);
         setupSeeAll(view);
         setupNotificationBell(view);
+
+        // Add press animations to interactive cards
+        View cardContinue = view.findViewById(R.id.card_continue);
+        if (cardContinue != null) {
+            com.example.a3dify.utils.AnimUtils.addPressAnimation(cardContinue);
+        }
+
+        // Add search bar glow
+        EditText etSearch = view.findViewById(R.id.et_search);
+        if (etSearch != null) {
+            com.example.a3dify.utils.AnimUtils.addSearchFocusGlow(etSearch);
+        }
     }
 
     // ── Greeting ──────────────────────────────────────────────────
@@ -127,7 +140,7 @@ public class HomeFragment extends Fragment {
     // ── Real search bar ───────────────────────────────────────────
     private void setupSearch(View view) {
         EditText etSearch = view.findViewById(R.id.et_search);
-        tvNoResults = view.findViewById(R.id.tv_no_results);
+        llNoResults = view.findViewById(R.id.ll_no_results);
 
         if (etSearch == null) return;
 
@@ -165,8 +178,8 @@ public class HomeFragment extends Fragment {
             featuredAdapter.updateList(filtered);
         }
 
-        if (tvNoResults != null) {
-            tvNoResults.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
+        if (llNoResults != null) {
+            llNoResults.setVisibility(filtered.isEmpty() ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -272,7 +285,7 @@ public class HomeFragment extends Fragment {
     // ── Featured tutorials ────────────────────────────────────────
     private void setupFeaturedTutorials(View view) {
         rvFeatured = view.findViewById(R.id.rv_featured);
-        tvNoResults = view.findViewById(R.id.tv_no_results);
+        llNoResults = view.findViewById(R.id.ll_no_results);
         if (rvFeatured == null) return;
 
         rvFeatured.setLayoutManager(
@@ -308,6 +321,10 @@ public class HomeFragment extends Fragment {
      * Also saves it as the last-viewed tutorial for Continue Learning.
      */
     private void openTutorial(Tutorial tutorial) {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime < 600) return;
+        lastClickTime = currentTime;
+
         // Save as last viewed
         requireContext()
             .getSharedPreferences("continue_learning", requireContext().MODE_PRIVATE)

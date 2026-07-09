@@ -1,11 +1,12 @@
 package com.example.a3dify.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,142 +16,130 @@ import java.util.List;
 
 /*
  * CategoryAdapter
- * Used in two places:
- *   1. HomeFragment — horizontal pill row (useRowLayout = false)
- *   2. ExploreFragment — vertical full-width rows (useRowLayout = true)
+ * Two modes:
+ *   isRowLayout = false → pill chips (Home screen horizontal row)
+ *   isRowLayout = true  → full-width rows (Explore screen)
  *
- * The useRowLayout flag tells the adapter which layout to inflate.
- * This avoids needing two separate adapter classes for the same data.
+ * Selected category pill gets orange border + orange text.
+ * All others get gray border + gray text.
  */
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CatHolder> {
 
     private final Context        context;
     private final List<Category> categories;
-    private final boolean        useRowLayout;
+    private final boolean        isRowLayout;
+    private       String         selectedCategory = "All";
     private       OnItemClickListener listener;
-    private       String              selectedCategory = "All";
+    private       long           lastClickTime = 0;
 
     public interface OnItemClickListener {
         void onItemClick(Category category);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+    public void setOnItemClickListener(OnItemClickListener l) {
+        this.listener = l;
     }
 
-    public void setSelectedCategory(String categoryName) {
-        this.selectedCategory = categoryName;
-        notifyDataSetChanged();
-    }
-
-    public CategoryAdapter(Context context, List<Category> categories, boolean useRowLayout) {
+    public CategoryAdapter(Context context, List<Category> categories, boolean isRowLayout) {
         this.context      = context;
         this.categories   = categories;
-        this.useRowLayout = useRowLayout;
+        this.isRowLayout  = isRowLayout;
+    }
+
+    public void setSelectedCategory(String name) {
+        this.selectedCategory = name;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Choose layout based on where this adapter is being used
-        int layout = useRowLayout
-                ? R.layout.item_category_row
-                : R.layout.item_category_pill;
-
-        View view = LayoutInflater.from(context).inflate(layout, parent, false);
-        return new CategoryViewHolder(view, useRowLayout);
+    public CatHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        int layout = isRowLayout
+            ? R.layout.item_category_row
+            : R.layout.item_category_pill;
+        View v = LayoutInflater.from(context).inflate(layout, parent, false);
+        return new CatHolder(v, isRowLayout);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CatHolder holder, int position) {
         Category cat = categories.get(position);
-
-        holder.tvIcon.setText(cat.getIcon());
-        holder.tvName.setText(cat.getName());
-
         boolean isSelected = cat.getName().equals(selectedCategory);
 
-        // Parse the category color
-        try {
-            int color = Color.parseColor(cat.getColorHex());
-            
-            if (!useRowLayout) {
-                // Pill style selection
-                if (isSelected) {
-                    holder.itemView.setBackgroundResource(R.drawable.bg_category_pill_selected);
-                    holder.tvName.setTextColor(Color.WHITE);
-                    if (holder.llIconBg != null) {
-                        holder.llIconBg.setBackgroundColor(Color.parseColor("#33FFFFFF"));
-                    }
-                } else {
-                    holder.itemView.setBackgroundResource(R.drawable.bg_category_pill);
-                    holder.tvName.setTextColor(context.getResources().getColor(R.color.text_primary));
-                    int dimColor = Color.argb(38, Color.red(color), Color.green(color), Color.blue(color));
-                    if (holder.llIconBg != null) {
-                        holder.llIconBg.setBackgroundColor(dimColor);
-                    }
-                }
-            } else {
-                // Row style (Explore tab)
-                int dimColor = Color.argb(38, Color.red(color), Color.green(color), Color.blue(color));
-                if (holder.llIconBg != null) {
-                    holder.llIconBg.setBackgroundColor(dimColor);
-                }
-                if (holder.tvDifficulty != null) {
-                    holder.tvDifficulty.setTextColor(color);
-                    holder.tvDifficulty.setBackgroundColor(dimColor);
-                }
+        if (!isRowLayout) {
+            // ── Pill mode ──
+            if (holder.tvName != null) {
+                holder.tvName.setText(cat.getName());
+                holder.tvName.setTextColor(isSelected
+                    ? Color.parseColor("#FF6A00")
+                    : Color.parseColor("#555555"));
             }
-        } catch (IllegalArgumentException ignored) {
-        }
+            holder.itemView.setBackgroundResource(isSelected
+                ? R.drawable.bg_pill_orange
+                : R.drawable.bg_pill);
 
-        // Highlight selected category with orange border (Applied to all items)
-        holder.itemView.setAlpha(isSelected ? 1.0f : 0.7f);
-        if (holder.tvName != null) {
-            holder.tvName.setTextColor(isSelected
-                    ? 0xFFFF6A00
-                    : 0xFF888888);
-        }
+            // Set icon
+            if (holder.ivIcon != null) {
+                holder.ivIcon.setImageResource(getCategoryIcon(cat.getName()));
+                holder.ivIcon.setAlpha(isSelected ? 1.0f : 0.4f);
+            }
 
-        // Fill row-only fields
-        if (useRowLayout) {
-            if (holder.tvCount != null) {
-                holder.tvCount.setText(cat.getCount() + " tutorials");
+        } else {
+            // ── Row mode ──
+            if (holder.tvName    != null) holder.tvName.setText(cat.getName());
+            if (holder.tvCount   != null) holder.tvCount.setText(cat.getCount() + " tutorials");
+            if (holder.tvLevel   != null) holder.tvLevel.setText(cat.getDifficulty());
+            if (holder.ivIcon    != null) {
+                holder.ivIcon.setImageResource(getCategoryIcon(cat.getName()));
             }
-            if (holder.tvDifficulty != null) {
-                holder.tvDifficulty.setText(cat.getDifficulty());
-            }
+
+            // Color the icon background
+            try {
+                int color = Color.parseColor(cat.getColorHex());
+                int dim   = Color.argb(30,
+                    Color.red(color), Color.green(color), Color.blue(color));
+                if (holder.vIconBg != null) holder.vIconBg.setBackgroundColor(dim);
+                if (holder.tvLevel != null) holder.tvLevel.setTextColor(color);
+            } catch (Exception ignored) {}
         }
 
         holder.itemView.setOnClickListener(v -> {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastClickTime < 600) return;
+            lastClickTime = currentTime;
+
             if (listener != null) listener.onItemClick(cat);
         });
     }
 
     @Override
-    public int getItemCount() {
-        return categories.size();
+    public int getItemCount() { return categories.size(); }
+
+    private int getCategoryIcon(String name) {
+        switch (name) {
+            case "3D Modeling":          return R.drawable.ic_cube;
+            case "Animation":            return R.drawable.ic_movie;
+            case "Sculpting":            return R.drawable.ic_brush;
+            case "Rendering":            return R.drawable.ic_image;
+            case "Geometry Nodes":       return R.drawable.ic_device_hub;
+            case "Materials & Textures": return R.drawable.ic_palette;
+            default:                     return R.drawable.ic_school;
+        }
     }
 
-    static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        TextView     tvIcon, tvName, tvCount, tvDifficulty;
-        LinearLayout llIconBg;
+    static class CatHolder extends RecyclerView.ViewHolder {
+        TextView  tvName, tvCount, tvLevel;
+        ImageView ivIcon;
+        View      vIconBg;
 
-        CategoryViewHolder(@NonNull View itemView, boolean useRowLayout) {
-            super(itemView);
-            tvIcon = itemView.findViewById(
-                    useRowLayout ? R.id.tv_cat_icon : R.id.tv_category_icon
-            );
-            tvName = itemView.findViewById(
-                    useRowLayout ? R.id.tv_cat_name : R.id.tv_category_name
-            );
-            llIconBg = itemView.findViewById(
-                    useRowLayout ? R.id.ll_cat_icon_bg : R.id.ll_icon_bg
-            );
-            // These only exist in the row layout
-            if (useRowLayout) {
-                tvCount      = itemView.findViewById(R.id.tv_cat_count);
-                tvDifficulty = itemView.findViewById(R.id.tv_cat_difficulty);
+        CatHolder(@NonNull View v, boolean isRow) {
+            super(v);
+            tvName  = v.findViewById(isRow ? R.id.tv_cat_name : R.id.tv_category_name);
+            ivIcon  = v.findViewById(isRow ? R.id.iv_cat_row_icon : R.id.iv_pill_icon);
+            if (isRow) {
+                tvCount = v.findViewById(R.id.tv_cat_count);
+                tvLevel = v.findViewById(R.id.tv_cat_difficulty);
+                vIconBg = v.findViewById(R.id.view_cat_icon_bg);
             }
         }
     }

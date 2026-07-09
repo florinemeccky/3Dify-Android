@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Profile menu row.
+    64dp height — comfortable tap target with breathing room.
+    Icon left, label center-weight, arrow right.
+    Ripple background for press feedback.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="@drawable/bg_ripple_row"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Icon — slightly larger and more visible -->
+    <ImageView
+        android:id="@+id/iv_row_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:scaleType="fitCenter"
+        android:alpha="0.55"
+        android:layout_marginEnd="18dp"/>
+
+    <!-- Label — takes all available space -->
+    <TextView
+        android:id="@+id/tv_row_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Menu Item"
+        android:textColor="@color/text_1"
+        android:textSize="15sp"/>
+
+    <!-- Arrow -->
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_arrow_right"
+        android:scaleType="fitCenter"
+        android:alpha="0.4"/>
+
+</LinearLayout>

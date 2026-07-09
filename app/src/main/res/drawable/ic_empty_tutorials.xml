@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp" android:height="120dp"
+    android:viewportWidth="120" android:viewportHeight="120">
+    <!-- Background circle -->
+    <path android:fillColor="#1AFF6A00"
+        android:pathData="M60,10C32.4,10 10,32.4 10,60S32.4,110 60,110 110,87.6 110,60 87.6,10 60,10Z"/>
+    <!-- Magnifying glass -->
+    <path android:fillColor="#FF6A00"
+        android:pathData="M77,70.5L68.7,62.2C70.2,59.8 71,57 71,54 71,45.2 63.8,38 55,38S39,45.2 39,54 46.2,70 55,70C58,70 60.8,69.2 63.2,67.7L71.5,76L77,70.5ZM55,65C48.9,65 44,60.1 44,54S48.9,43 55,43 66,47.9 66,54 61.1,65 55,65Z"/>
+</vector>

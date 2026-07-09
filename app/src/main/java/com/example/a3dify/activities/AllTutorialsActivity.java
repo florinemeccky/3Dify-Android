@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class AllTutorialsActivity extends AppCompatActivity {
 
+    private long lastClickTime = 0;
     private TutorialAdapter    adapter;
     private TutorialRepository repo;
     private String             categoryFilter = null;
@@ -100,6 +101,10 @@ public class AllTutorialsActivity extends AppCompatActivity {
     }
 
     private void openTutorial(Tutorial tutorial) {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime < 600) return;
+        lastClickTime = currentTime;
+
         // Save as last viewed for Continue Learning
         getSharedPreferences("continue_learning", MODE_PRIVATE)
             .edit()

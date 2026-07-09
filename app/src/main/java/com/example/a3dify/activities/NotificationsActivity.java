@@ -1,7 +1,7 @@
 package com.example.a3dify.activities;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a3dify.R;
 
@@ -18,7 +18,7 @@ public class NotificationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
 
-        TextView tvBack = findViewById(R.id.tv_back);
-        if (tvBack != null) tvBack.setOnClickListener(v -> finish());
+        ImageView ivBack = findViewById(R.id.iv_back);
+        if (ivBack != null) ivBack.setOnClickListener(v -> finish());
     }
 }

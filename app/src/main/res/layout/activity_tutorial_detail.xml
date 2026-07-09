@@ -1,236 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    activity_tutorial_detail.xml
-    Shows full details for one tutorial.
-    Required IDs:
-      - tv_back              (back arrow)
-      - tv_tutorial_icon     (large emoji thumbnail)
-      - tv_tutorial_title    (tutorial name)
-      - tv_difficulty_badge  (Beginner / Intermediate / Advanced)
-      - tv_duration_badge    (e.g. 22 min)
-      - tv_category_badge    (e.g. Modeling)
-      - tv_description       (full description text)
-      - btn_watch            (Watch Tutorial button)
-      - btn_mark_done        (Mark as Done button)
-      - tv_done_status       (shows tick when already completed)
-      - et_notes             (personal notes input)
-      - btn_save_notes       (saves notes to SharedPreferences)
--->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_primary"
+    android:background="@color/bg_primary"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="40dp">
+        android:orientation="vertical">
 
-        <!-- Top bar: back arrow + bookmark area -->
+        <!-- ══ HERO ══ -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_hero_height">
+
+            <!-- Gradient background -->
+            <View
+                android:id="@+id/view_hero_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <!-- Bottom scrim for text legibility -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_hero_scrim"/>
+
+            <!-- Center icon -->
+            <ImageView
+                android:id="@+id/iv_hero_icon"
+                android:layout_width="@dimen/detail_hero_icon"
+                android:layout_height="@dimen/detail_hero_icon"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:alpha="0.9"/>
+
+            <!-- Top bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:layout_gravity="top">
+
+                <LinearLayout
+                    android:id="@+id/btn_back"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@color/bg_overlay"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_back"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
+
+                <View android:layout_width="0dp" android:layout_height="1dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tv_done_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓  Completed"
+                    android:textColor="@color/text_1"
+                    android:textSize="@dimen/text_caption"
+                    android:textStyle="bold"
+                    android:background="@color/success_10"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- ══ CONTENT ══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="20dp">
+            android:orientation="vertical"
+            android:paddingStart="@dimen/screen_margin"
+            android:paddingEnd="@dimen/screen_margin"
+            android:paddingTop="20dp">
 
-            <TextView
-                android:id="@+id/tv_back"
-                android:layout_width="0dp"
+            <!-- Badges row -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="← Back"
-                android:textColor="#FF6A00"
-                android:textSize="14sp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tv_difficulty_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beginner"
+                    android:textColor="@color/diff_beginner"
+                    android:textSize="@dimen/text_label"
+                    android:textStyle="bold"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/bg_badge_beginner"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_duration_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="28 min"
+                    android:textColor="@color/info"
+                    android:textSize="@dimen/text_label"
+                    android:textStyle="bold"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:background="@color/info_10"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_category_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modeling"
+                    android:textColor="@color/text_3"
+                    android:textSize="@dimen/text_label"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"/>
+            </LinearLayout>
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tv_tutorial_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tutorial Title"
+                android:textColor="@color/text_1"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold"
+                android:lineSpacingMultiplier="1.2"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Description -->
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/text_2"
+                android:textSize="@dimen/text_body"
+                android:lineSpacingMultiplier="1.7"
+                android:layout_marginBottom="28dp"/>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/border_subtle"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Watch button -->
+            <LinearLayout
+                android:id="@+id/btn_watch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height_primary"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_btn_primary"
+                android:orientation="horizontal"
+                android:gravity="center"
                 android:clickable="true"
-                android:focusable="true"
-                android:padding="4dp"/>
+                android:focusable="true">
 
-            <!-- Done status indicator — hidden until marked complete -->
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_play"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Watch Tutorial"
+                    android:textColor="@color/text_inverse"
+                    android:textSize="@dimen/text_body_lg"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- Mark done button -->
+            <LinearLayout
+                android:id="@+id/btn_mark_done"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height_primary"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/bg_btn_success"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_check"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mark as Done"
+                    android:textColor="@color/success"
+                    android:textSize="@dimen/text_body_lg"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- Notes section label -->
             <TextView
-                android:id="@+id/tv_done_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✅ Completed"
-                android:textColor="#2ECC71"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:visibility="gone"/>
+                android:layout_marginBottom="10dp"
+                android:text="My Notes"
+                style="@style/TextAppearance.3Dify.SectionLabel"/>
+
+            <!-- Notes input -->
+            <EditText
+                android:id="@+id/et_notes"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_surface_2"
+                android:hint="Write your personal notes for this tutorial…"
+                android:textColor="@color/text_1"
+                android:textColorHint="@color/text_3"
+                android:textSize="@dimen/text_body_sm"
+                android:padding="14dp"
+                android:gravity="top"
+                android:inputType="textMultiLine"/>
+
+            <!-- Save notes -->
+            <Button
+                android:id="@+id/btn_save_notes"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height_secondary"
+                android:layout_marginBottom="40dp"
+                android:text="Save Notes"
+                android:textColor="@color/text_2"
+                android:textSize="@dimen/text_body"
+                android:backgroundTint="@color/bg_surface_2"/>
+
         </LinearLayout>
-
-        <!-- Video thumbnail area -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/background_card"
-            android:gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp">
-
-            <!-- Large emoji as thumbnail -->
-            <TextView
-                android:id="@+id/tv_tutorial_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🧊"
-                android:textSize="72sp"/>
-        </LinearLayout>
-
-        <!-- Badges row -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:layout_marginBottom="12dp">
-
-            <!-- Difficulty badge -->
-            <TextView
-                android:id="@+id/tv_difficulty_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Beginner"
-                android:textColor="#FF6A00"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:background="#1AFF6A00"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:layout_marginEnd="8dp"/>
-
-            <!-- Duration badge -->
-            <TextView
-                android:id="@+id/tv_duration_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="22 min"
-                android:textColor="#4A90E2"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:background="#1A4A90E2"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:layout_marginEnd="8dp"/>
-
-            <!-- Category badge -->
-            <TextView
-                android:id="@+id/tv_category_badge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Modeling"
-                android:textColor="#7B5EA7"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:background="#1A7B5EA7"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"/>
-        </LinearLayout>
-
-        <!-- Tutorial title -->
-        <TextView
-            android:id="@+id/tv_tutorial_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tutorial Title"
-            android:textColor="@color/text_primary"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:layout_marginBottom="12dp"
-            android:lineSpacingMultiplier="1.3"/>
-
-        <!-- Description -->
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tutorial description goes here."
-            android:textColor="#AAAAAA"
-            android:textSize="14sp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:lineSpacingMultiplier="1.6"
-            android:layout_marginBottom="28dp"/>
-
-        <!-- Watch Tutorial button -->
-        <Button
-            android:id="@+id/btn_watch"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="12dp"
-            android:text="▶   Watch Tutorial"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:backgroundTint="#FF6A00"/>
-
-        <!-- Mark as Done button -->
-        <Button
-            android:id="@+id/btn_mark_done"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="28dp"
-            android:text="✓   Mark as Done"
-            android:textColor="#2ECC71"
-            android:textSize="15sp"
-            android:backgroundTint="#1A2ECC71"/>
-
-        <!-- Notes section label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MY NOTES"
-            android:textColor="#555555"
-            android:textSize="11sp"
-            android:letterSpacing="0.12"
-            android:paddingStart="20dp"
-            android:layout_marginBottom="10dp"/>
-
-        <!-- Notes input -->
-        <EditText
-            android:id="@+id/et_notes"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="12dp"
-            android:background="@color/background_card"
-            android:hint="Write your personal notes for this tutorial…"
-            android:textColor="@color/text_primary"
-            android:textColorHint="@color/text_hint"
-            android:textSize="13sp"
-            android:padding="14dp"
-            android:gravity="top"
-            android:inputType="textMultiLine"/>
-
-        <!-- Save notes button -->
-        <Button
-            android:id="@+id/btn_save_notes"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="Save Notes"
-            android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:backgroundTint="@color/border_color"/>
-
     </LinearLayout>
 </ScrollView>

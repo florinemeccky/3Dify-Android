@@ -1,54 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Spacing -->
-    <dimen name="space_xs">4dp</dimen>
-    <dimen name="space_s">8dp</dimen>
-    <dimen name="space_m">12dp</dimen>
-    <dimen name="space_l">16dp</dimen>
-    <dimen name="space_xl">24dp</dimen>
-    <dimen name="space_xxl">32dp</dimen>
 
-    <!-- Radii -->
-    <dimen name="radius_btn">10dp</dimen>
-    <dimen name="radius_card">14dp</dimen>
-    <dimen name="radius_icon">10dp</dimen>
-    <dimen name="radius_badge">20dp</dimen>
-    <dimen name="radius_input">10dp</dimen>
-    <dimen name="radius_small">8dp</dimen>
+    <!--
+        3DIFY SPACING SYSTEM
+        ════════════════════
+        Base unit: 4dp
+        All spacing is a multiple of 4.
+        All corner radii follow the scale below.
+    -->
+
+    <!-- Spacing scale -->
+    <dimen name="space_2">2dp</dimen>
+    <dimen name="space_4">4dp</dimen>
+    <dimen name="space_8">8dp</dimen>
+    <dimen name="space_12">12dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_24">24dp</dimen>
+    <dimen name="space_32">32dp</dimen>
+    <dimen name="space_40">40dp</dimen>
+    <dimen name="space_48">48dp</dimen>
+    <dimen name="space_64">64dp</dimen>
+
+    <!-- Screen edge margin — always 20dp -->
+    <dimen name="screen_margin">20dp</dimen>
+
+    <!-- Corner radius scale -->
+    <dimen name="radius_sm">6dp</dimen>
+    <dimen name="radius_md">10dp</dimen>
+    <dimen name="radius_lg">14dp</dimen>
+    <dimen name="radius_xl">20dp</dimen>
+    <dimen name="radius_pill">100dp</dimen>
 
     <!-- Component heights -->
-    <dimen name="btn_height">48dp</dimen>
-    <dimen name="btn_ghost_height">44dp</dimen>
-    <dimen name="input_height">52dp</dimen>
-    <dimen name="bottom_nav_height">64dp</dimen>
-    <dimen name="progress_bar_h">5dp</dimen>
+    <dimen name="btn_height_primary">52dp</dimen>
+    <dimen name="btn_height_secondary">44dp</dimen>
+    <dimen name="input_height">50dp</dimen>
+    <dimen name="nav_height">64dp</dimen>
+    <dimen name="list_row_height">72dp</dimen>
 
-    <!-- Icon sizes -->
-    <dimen name="icon_xs">16dp</dimen>
-    <dimen name="icon_s">20dp</dimen>
-    <dimen name="icon_m">24dp</dimen>
-    <dimen name="icon_l">32dp</dimen>
-    <dimen name="icon_xl">48dp</dimen>
-    <dimen name="icon_logo">72dp</dimen>
-    <dimen name="icon_category">40dp</dimen>
-    <dimen name="icon_avatar">64dp</dimen>
-    <dimen name="icon_avatar_sm">40dp</dimen>
-    <dimen name="icon_notif">36dp</dimen>
+    <!-- Card dimensions -->
+    <dimen name="card_tutorial_width">168dp</dimen>
+    <dimen name="card_tutorial_thumb_height">106dp</dimen>
+    <dimen name="card_padding">14dp</dimen>
 
-    <!-- Tutorial card -->
-    <dimen name="tut_thumb_height">80dp</dimen>
-    <dimen name="tut_card_min_width">130dp</dimen>
-    <dimen name="tut_video_height">200dp</dimen>
+    <!-- Hero section -->
+    <dimen name="hero_height">240dp</dimen>
+    <dimen name="hero_icon_size">72dp</dimen>
+
+    <!-- Avatar -->
+    <dimen name="avatar_size">64dp</dimen>
+    <dimen name="avatar_initials_size">22sp</dimen>
+
+    <!-- Progress -->
+    <dimen name="progress_bar_height">5dp</dimen>
+    <dimen name="progress_circle_size">80dp</dimen>
+    <dimen name="progress_circle_stroke">7dp</dimen>
 
     <!-- Typography -->
     <dimen name="text_display">28sp</dimen>
-    <dimen name="text_title_l">22sp</dimen>
-    <dimen name="text_title_m">18sp</dimen>
-    <dimen name="text_title_s">16sp</dimen>
-    <dimen name="text_body_l">14sp</dimen>
-    <dimen name="text_body_m">13sp</dimen>
-    <dimen name="text_body_s">12sp</dimen>
+    <dimen name="text_title">22sp</dimen>
+    <dimen name="text_headline">18sp</dimen>
+    <dimen name="text_body_lg">15sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_body_sm">13sp</dimen>
     <dimen name="text_caption">11sp</dimen>
     <dimen name="text_label">10sp</dimen>
-    <dimen name="text_tiny">9sp</dimen>
+
+    <!-- Section label letter spacing workaround -->
+    <dimen name="section_label_size">11sp</dimen>
+
+    <!-- Bottom nav indicator -->
+    <dimen name="nav_indicator_width">28dp</dimen>
+    <dimen name="nav_indicator_height">2dp</dimen>
+
+    <!-- Thumbnail row item -->
+    <dimen name="thumb_row_size">72dp</dimen>
+
+    <!-- Tutorial detail hero -->
+    <dimen name="detail_hero_height">220dp</dimen>
+    <dimen name="detail_hero_icon">80dp</dimen>
+
 </resources>

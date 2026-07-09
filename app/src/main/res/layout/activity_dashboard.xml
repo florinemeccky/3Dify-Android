@@ -4,21 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_primary">
+    android:background="@color/bg_primary">
 
-    <!--
-        Offline banner — hidden when internet is available.
-        Shown automatically by DashboardActivity.checkInternetConnection().
-        Satisfies the lecturer's Internet Connection Detection requirement.
-    -->
+    <!-- Offline banner -->
     <TextView
         android:id="@+id/tv_offline_banner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="⚠️  No internet connection — some features may be unavailable"
-        android:textColor="@color/text_primary"
-        android:textSize="12sp"
-        android:background="#E74C3C"
+        android:text="No internet connection — some features may be unavailable"
+        android:textColor="@color/text_1"
+        android:textSize="@dimen/text_caption"
+        android:background="@color/error"
         android:gravity="center"
         android:padding="8dp"
         android:visibility="gone"
@@ -32,15 +28,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/tv_offline_banner"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintBottom_toTopOf="@id/divider_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Divider -->
+    <!-- Top border above nav -->
     <View
+        android:id="@+id/divider_nav"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/border_color"
+        android:background="@color/border_subtle"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -49,14 +46,15 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/background_card"
+        android:layout_height="@dimen/nav_height"
+        android:background="@color/bg_surface_1"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@drawable/nav_item_color"
         app:itemTextColor="@drawable/nav_item_color"
-        app:itemRippleColor="#1AFF6A00"
+        app:itemRippleColor="@color/orange_10"
         app:labelVisibilityMode="labeled"
         app:elevation="0dp"
+        app:itemActiveIndicatorStyle="@style/Widget.3Dify.NavIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

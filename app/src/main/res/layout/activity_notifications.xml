@@ -1,49 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_primary"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:background="@color/bg_primary"
+    android:orientation="vertical">
 
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/screen_margin"
+        android:paddingEnd="@dimen/screen_margin"
+        android:paddingTop="48dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back"
+            android:scaleType="fitCenter"
+            android:background="@drawable/bg_surface_2"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Notifications"
+            android:textColor="@color/text_1"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Section: Today -->
     <TextView
-        android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="← Back"
-        android:textColor="#FF6A00"
-        android:textSize="14sp"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="4dp"
-        android:layout_marginBottom="20dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notifications."
-        android:textColor="@color/text_primary"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginStart="@dimen/screen_margin"
+        android:layout_marginBottom="8dp"
+        android:text="Today"
+        style="@style/TextAppearance.3Dify.SectionLabel"/>
 
     <!-- Notification 1 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_card"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="10dp">
+        android:gravity="top"
+        android:paddingStart="@dimen/screen_margin"
+        android:paddingEnd="@dimen/screen_margin"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:background="@drawable/bg_ripple_row"
+        android:clickable="true"
+        android:focusable="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🎯"
-            android:textSize="22sp"
-            android:layout_marginEnd="14dp"/>
+        <!-- Icon container -->
+        <LinearLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_achievement_unlocked"
+            android:gravity="center"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="2dp">
+            <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                android:src="@drawable/ic_check" android:scaleType="fitCenter"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -52,39 +82,60 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New tutorials available"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:text="Tutorial completed"
+                android:textColor="@color/text_1"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3 new Blender tutorials have been added to the library."
-                android:textColor="@color/text_muted"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp"/>
+                android:text="You finished Sculpting Basics. Great work!"
+                android:textColor="@color/text_3"
+                android:textSize="@dimen/text_body_sm"
+                android:lineSpacingMultiplier="1.4"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="2h ago"
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_label"/>
     </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+        android:background="@color/border_subtle"
+        android:layout_marginStart="@dimen/screen_margin"/>
 
     <!-- Notification 2 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_card"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="10dp">
+        android:gravity="top"
+        android:paddingStart="@dimen/screen_margin"
+        android:paddingEnd="@dimen/screen_margin"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:background="@drawable/bg_ripple_row"
+        android:clickable="true"
+        android:focusable="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🔥"
-            android:textSize="22sp"
-            android:layout_marginEnd="14dp"/>
+        <LinearLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_surface_2"
+            android:gravity="center"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="2dp">
+            <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                android:src="@drawable/ic_school" android:scaleType="fitCenter" android:alpha="0.6"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -93,39 +144,71 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keep your streak going!"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:text="New course available"
+                android:textColor="@color/text_1"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Complete a tutorial today to maintain your learning streak."
-                android:textColor="@color/text_muted"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp"/>
+                android:text="3 new Blender tutorials have been added to the library."
+                android:textColor="@color/text_3"
+                android:textSize="@dimen/text_body_sm"
+                android:lineSpacingMultiplier="1.4"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="5h ago"
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_label"/>
     </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+        android:background="@color/border_subtle"
+        android:layout_marginStart="@dimen/screen_margin"/>
+
+    <!-- Section: Yesterday -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screen_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:text="Yesterday"
+        style="@style/TextAppearance.3Dify.SectionLabel"/>
 
     <!-- Notification 3 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_card"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp"
-        android:layout_marginBottom="10dp">
+        android:gravity="top"
+        android:paddingStart="@dimen/screen_margin"
+        android:paddingEnd="@dimen/screen_margin"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:background="@drawable/bg_ripple_row"
+        android:clickable="true"
+        android:focusable="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🏆"
-            android:textSize="22sp"
-            android:layout_marginEnd="14dp"/>
+        <LinearLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@color/error_10"
+            android:gravity="center"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="2dp">
+            <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                android:src="@drawable/ic_nav_progress" android:scaleType="fitCenter"
+                app:tint="@color/error"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -134,21 +217,30 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Achievement unlocked!"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:text="Keep your streak alive!"
+                android:textColor="@color/text_1"
+                android:textSize="@dimen/text_body"
+                android:textStyle="bold"
+                android:layout_marginBottom="3dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You completed your first tutorial. Great start!"
-                android:textColor="@color/text_muted"
-                android:textSize="12sp"
-                android:layout_marginTop="3dp"/>
+                android:text="Complete a tutorial today to maintain your 7-day streak."
+                android:textColor="@color/text_3"
+                android:textSize="@dimen/text_body_sm"
+                android:lineSpacingMultiplier="1.4"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="1d ago"
+            android:textColor="@color/text_3"
+            android:textSize="@dimen/text_label"/>
     </LinearLayout>
 
 </LinearLayout>
