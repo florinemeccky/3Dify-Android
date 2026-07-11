@@ -53,6 +53,7 @@ public class TutorialDetailActivity extends AppCompatActivity {
 
         // Read all tutorial data passed from the adapter via Intent
         Intent intent     = getIntent();
+        String icon       = intent.getStringExtra("icon");
         String title      = intent.getStringExtra("title");
         String category   = intent.getStringExtra("category");
         String difficulty = intent.getStringExtra("difficulty");
@@ -60,13 +61,33 @@ public class TutorialDetailActivity extends AppCompatActivity {
         String description = intent.getStringExtra("description");
         tutorialId        = intent.getStringExtra("tutorialId");
 
-        // Create a dummy Tutorial object to use its UI helper methods
-        Tutorial temp = new Tutorial("", title, category, difficulty, duration, description, tutorialId);
-
         // Connect all views
         View      btnBack         = findViewById(R.id.btn_back);
-        View      viewHeroBg      = findViewById(R.id.view_hero_bg);
-        ImageView ivHeroIcon      = findViewById(R.id.iv_hero_icon);
+
+        // ── Hero gradient and icon — always visible ──
+        View viewHeroBg = findViewById(R.id.view_hero_bg);
+        ImageView ivHeroIcon = findViewById(R.id.iv_hero_icon);
+
+        // Build a temporary Tutorial object just to access the helper methods
+        com.example.a3dify.models.Tutorial tempTut =
+            new com.example.a3dify.models.Tutorial(
+                icon, title, category, difficulty,
+                duration, description, tutorialId);
+
+        // Apply the colored gradient background
+        if (viewHeroBg != null) {
+            viewHeroBg.setBackgroundResource(tempTut.getThumbnailBackground());
+        }
+
+        // Apply the white category icon over the gradient
+        if (ivHeroIcon != null) {
+            ivHeroIcon.setImageResource(tempTut.getCategoryIcon());
+            ivHeroIcon.setVisibility(android.view.View.VISIBLE);
+            ivHeroIcon.setColorFilter(
+                android.graphics.Color.WHITE,
+                android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+
         TextView  tvTitle         = findViewById(R.id.tv_tutorial_title);
         TextView  tvDifficulty    = findViewById(R.id.tv_difficulty_badge);
         TextView  tvDuration      = findViewById(R.id.tv_duration_badge);
@@ -84,19 +105,11 @@ public class TutorialDetailActivity extends AppCompatActivity {
         tvDuration.setText(duration);
         tvCategory.setText(category);
 
-        // Hero styling
-        if (viewHeroBg != null) {
-            viewHeroBg.setBackgroundResource(temp.getThumbnailBackground());
-        }
-        if (ivHeroIcon != null) {
-            ivHeroIcon.setImageResource(temp.getCategoryIcon());
-        }
-
         // Metadata badges styling
         if (tvDifficulty != null) {
             tvDifficulty.setText(difficulty);
-            tvDifficulty.setTextColor(temp.getDifficultyColor());
-            tvDifficulty.setBackgroundResource(temp.getDifficultyBadgeBackground());
+            tvDifficulty.setTextColor(tempTut.getDifficultyColor());
+            tvDifficulty.setBackgroundResource(tempTut.getDifficultyBadgeBackground());
         }
 
         // Back arrow

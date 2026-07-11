@@ -17,13 +17,16 @@
         <item name="colorSecondary">@color/cat_basics</item>
         <item name="colorOnSecondary">@color/text_inverse</item>
 
-        <!-- Surfaces -->
+        <!-- Window background — this is what changes when mode switches -->
         <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="android:windowBackground">@color/bg_primary</item>
+
+        <!-- Surface colors -->
         <item name="colorSurface">@color/bg_surface_1</item>
         <item name="colorOnSurface">@color/text_1</item>
         <item name="colorOnBackground">@color/text_1</item>
 
-        <!-- Status bar — dark, no light icons -->
+        <!-- Status bar -->
         <item name="android:statusBarColor">@color/bg_primary</item>
         <item name="android:windowLightStatusBar">false</item>
 
@@ -36,10 +39,10 @@
         <!-- Cards -->
         <item name="materialCardViewStyle">@style/Widget.3Dify.Card</item>
 
-        <!-- Text inputs -->
+        <!-- Text input -->
         <item name="textInputStyle">@style/Widget.3Dify.TextInput</item>
 
-        <!-- Screen transition -->
+        <!-- Transitions -->
         <item name="android:windowAnimationStyle">@style/Transition.3Dify</item>
 
     </style>

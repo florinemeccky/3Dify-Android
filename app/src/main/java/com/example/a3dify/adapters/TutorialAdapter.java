@@ -3,61 +3,72 @@ package com.example.a3dify.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.a3dify.R;
 import com.example.a3dify.activities.TutorialDetailActivity;
 import com.example.a3dify.models.Tutorial;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * TutorialAdapter
- * Handles two display modes:
- *   isCard = true  → horizontal card (item_tutorial_card.xml)
- *   isCard = false → vertical row  (item_tutorial_row.xml)
  *
- * Uses Tutorial.getThumbnailBackground() for gradient backgrounds.
- * Uses Tutorial.getCategoryIcon() for the vector icon.
- * Uses Tutorial.getDifficultyBadgeBackground() for colored badges.
+ * isCard = true  → inflates item_tutorial_card.xml  (horizontal scroll)
+ * isCard = false → inflates item_tutorial_row.xml   (vertical list)
  *
- * The constructor with no isCard parameter defaults to card mode.
+ * The colored gradient thumbnail is applied to the FrameLayout container
+ * (fl_thumbnail or fl_row_thumbnail) directly — not to a child View.
+ * This guarantees the color is always visible on all Android versions.
+ *
+ * The white icon is tinted via setColorFilter() in Java, not via XML,
+ * because XML colorFilter attribute is unreliable below API 29.
  */
-public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.TutorialViewHolder> {
+public class TutorialAdapter
+    extends RecyclerView.Adapter<TutorialAdapter.TutorialViewHolder> {
 
-    private final Context      context;
-    private       List<Tutorial> tutorials;
-    private final boolean      isCard;
-    private       OnItemClickListener listener;
-    private       long           lastClickTime = 0;
+    private final Context context;
+    private List<Tutorial> tutorials;
+    private final boolean isCard;
+    private OnItemClickListener listener;
 
     public interface OnItemClickListener {
         void onItemClick(Tutorial tutorial);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+    public void setOnItemClickListener(OnItemClickListener l) {
+        this.listener = l;
     }
 
-    // Card mode (horizontal scroll)
+    // Default constructor — card mode
     public TutorialAdapter(Context context, List<Tutorial> tutorials) {
         this.context   = context;
         this.tutorials = new ArrayList<>(tutorials);
         this.isCard    = true;
     }
 
-    // Explicit mode selection
+    // Explicit mode
     public TutorialAdapter(Context context, List<Tutorial> tutorials, boolean isCard) {
         this.context   = context;
         this.tutorials = new ArrayList<>(tutorials);
         this.isCard    = isCard;
     }
 
+    // Called by search filtering
     public void updateList(List<Tutorial> newList) {
         this.tutorials = new ArrayList<>(newList);
         notifyDataSetChanged();
@@ -69,103 +80,100 @@ public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.Tutori
         int layout = isCard
             ? R.layout.item_tutorial_card
             : R.layout.item_tutorial_row;
-        View view = LayoutInflater.from(context).inflate(layout, parent, false);
-        return new TutorialViewHolder(view, isCard);
+        View v = LayoutInflater.from(context).inflate(layout, parent, false);
+        return new TutorialViewHolder(v, isCard);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TutorialViewHolder holder, int position) {
-        Tutorial tutorial = tutorials.get(position);
+        Tutorial t = tutorials.get(position);
 
-        // ── Title ──
+        // ── Title ──────────────────────────────────────────────────
         if (holder.tvTitle != null) {
-            holder.tvTitle.setText(tutorial.getTitle());
+            holder.tvTitle.setText(t.getTitle());
         }
 
-        // ── Difficulty badge ──
+        // ── Difficulty badge ────────────────────────────────────────
         if (holder.tvDifficulty != null) {
-            holder.tvDifficulty.setText(tutorial.getDifficulty());
-            holder.tvDifficulty.setTextColor(tutorial.getDifficultyColor());
+            holder.tvDifficulty.setText(t.getDifficulty());
+            holder.tvDifficulty.setTextColor(t.getDifficultyColor());
             holder.tvDifficulty.setBackgroundResource(
-                tutorial.getDifficultyBadgeBackground());
+                t.getDifficultyBadgeBackground());
         }
 
-        // ── Duration ──
+        // ── Duration ────────────────────────────────────────────────
         if (holder.tvDuration != null) {
-            holder.tvDuration.setText(tutorial.getDuration());
+            holder.tvDuration.setText(t.getDuration());
         }
 
-        // ── Gradient thumbnail background ──
-        if (holder.viewThumbBg != null) {
-            holder.viewThumbBg.setBackgroundResource(
-                tutorial.getThumbnailBackground());
+        // ── Category label (row mode only) ──────────────────────────
+        if (!isCard && holder.tvCategory != null) {
+            holder.tvCategory.setText(t.getCategory());
         }
 
-        // ── Category icon ──
+        // ── THUMBNAIL GRADIENT ──────────────────────────────────────
+        // Set on the FrameLayout itself — this is the guaranteed approach.
+        // Setting on a child View can silently fail when the RecyclerView
+        // recycles views before they are fully laid out.
+        if (holder.flThumbnail != null) {
+            holder.flThumbnail.setBackgroundResource(t.getThumbnailBackground());
+        }
+
+        // ── CATEGORY ICON ───────────────────────────────────────────
+        // Set icon resource and tint it white in Java.
+        // Using DrawableCompat for better compatibility across Android versions.
         if (holder.ivIcon != null) {
-            holder.ivIcon.setImageResource(tutorial.getCategoryIcon());
-        }
-
-        // ── Row-only fields ──
-        if (!isCard) {
-            if (holder.tvCategory != null) {
-                holder.tvCategory.setText(tutorial.getCategory());
+            Drawable icon = ContextCompat.getDrawable(context, t.getCategoryIcon());
+            if (icon != null) {
+                icon = DrawableCompat.wrap(icon).mutate();
+                DrawableCompat.setTint(icon, Color.WHITE);
+                holder.ivIcon.setImageDrawable(icon);
             }
+            holder.ivIcon.setVisibility(View.VISIBLE);
         }
 
-        // ── Tap → open TutorialDetailActivity ──
+        // ── TAP HANDLER ─────────────────────────────────────────────
         holder.itemView.setOnClickListener(v -> {
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - lastClickTime < 600) return;
-            lastClickTime = currentTime;
-
             if (listener != null) {
-                listener.onItemClick(tutorial);
-            } else {
-                // Default behavior if no listener is provided:
-                // Save as last viewed for Continue Learning
-                SharedPreferences prefs = context.getSharedPreferences(
-                        "continue_learning", Context.MODE_PRIVATE);
-                prefs.edit()
-                        .putString("last_tutorial_id",    tutorial.getTutorialId())
-                        .putString("last_tutorial_title", tutorial.getTitle())
-                        .apply();
-
-                Intent intent = new Intent(context, TutorialDetailActivity.class);
-                intent.putExtra("icon",        tutorial.getIcon());
-                intent.putExtra("title",       tutorial.getTitle());
-                intent.putExtra("category",    tutorial.getCategory());
-                intent.putExtra("difficulty",  tutorial.getDifficulty());
-                intent.putExtra("duration",    tutorial.getDuration());
-                intent.putExtra("description", tutorial.getDescription());
-                intent.putExtra("tutorialId",  tutorial.getTutorialId());
-                context.startActivity(intent);
+                listener.onItemClick(t);
             }
         });
     }
 
     @Override
-    public int getItemCount() { return tutorials.size(); }
+    public int getItemCount() {
+        return tutorials.size();
+    }
 
+    // ── ViewHolder ───────────────────────────────────────────────────
     static class TutorialViewHolder extends RecyclerView.ViewHolder {
-        TextView  tvTitle, tvDifficulty, tvDuration, tvCategory;
-        ImageView ivIcon;
-        View      viewThumbBg;
+
+        // Shared between card and row
+        TextView    tvTitle, tvDifficulty, tvDuration;
+        ImageView   ivIcon;
+        FrameLayout flThumbnail;   // ← the container that gets the background
+
+        // Row mode only
+        TextView tvCategory;
 
         TutorialViewHolder(@NonNull View itemView, boolean isCard) {
             super(itemView);
-            tvTitle      = itemView.findViewById(
-                isCard ? R.id.tv_tutorial_title : R.id.tv_row_title);
-            tvDifficulty = itemView.findViewById(
-                isCard ? R.id.tv_tutorial_difficulty : R.id.tv_row_difficulty);
-            tvDuration   = itemView.findViewById(
-                isCard ? R.id.tv_thumb_duration : R.id.tv_row_duration);
-            ivIcon       = itemView.findViewById(
-                isCard ? R.id.iv_tutorial_icon : R.id.iv_row_icon);
-            viewThumbBg  = itemView.findViewById(
-                isCard ? R.id.view_thumb_bg : R.id.view_row_thumb_bg);
-            if (!isCard) {
-                tvCategory = itemView.findViewById(R.id.tv_row_category);
+
+            if (isCard) {
+                // Card layout IDs
+                flThumbnail  = itemView.findViewById(R.id.fl_thumbnail);
+                tvTitle      = itemView.findViewById(R.id.tv_tutorial_title);
+                tvDifficulty = itemView.findViewById(R.id.tv_tutorial_difficulty);
+                tvDuration   = itemView.findViewById(R.id.tv_thumb_duration);
+                ivIcon       = itemView.findViewById(R.id.iv_tutorial_icon);
+            } else {
+                // Row layout IDs
+                flThumbnail  = itemView.findViewById(R.id.fl_row_thumbnail);
+                tvTitle      = itemView.findViewById(R.id.tv_row_title);
+                tvDifficulty = itemView.findViewById(R.id.tv_row_difficulty);
+                tvDuration   = itemView.findViewById(R.id.tv_row_duration);
+                ivIcon       = itemView.findViewById(R.id.iv_row_icon);
+                tvCategory   = itemView.findViewById(R.id.tv_row_category);
             }
         }
     }

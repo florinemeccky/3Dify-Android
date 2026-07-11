@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Used when an Activity closes (Back pressed).
-    The PREVIOUS screen slides in from the left.
-    Faster than the open animation (180ms vs 260ms) so Back feels instant.
+    Back navigation ENTER — previous screen slides in from left.
+    Starts at -40% to mirror the slide_out_left exit.
+    Slightly faster than forward navigation so Back feels snappy.
 -->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate
@@ -11,7 +11,7 @@
         android:duration="220"
         android:interpolator="@android:interpolator/decelerate_cubic"/>
     <alpha
-        android:fromAlpha="0.7"
+        android:fromAlpha="0.6"
         android:toAlpha="1.0"
         android:duration="220"/>
 </set>

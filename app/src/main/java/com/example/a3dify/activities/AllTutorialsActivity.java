@@ -59,7 +59,7 @@ public class AllTutorialsActivity extends AppCompatActivity {
                 ? repo.getByCategory(categoryFilter)
                 : repo.getAll();
 
-            adapter = new TutorialAdapter(this, initial);
+            adapter = new TutorialAdapter(this, initial, false);
             adapter.setOnItemClickListener(this::openTutorial);
             rv.setAdapter(adapter);
         }

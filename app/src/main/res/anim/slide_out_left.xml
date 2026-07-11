@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Forward navigation EXIT — current screen slides out to left.
+    Only moves 40% so the previous screen does not feel like it
+    disappears — it recedes naturally.
+-->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate
         android:fromXDelta="0%"

@@ -1,46 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
-        3DIFY PRECISION DARK — Design System v2
-        ════════════════════════════════════════
-        Rule: Orange is used ONLY for:
-          - Active nav tab underline
-          - Primary CTA button fill
-          - Progress bar fills
-          - Focused input border
-          - Selected category highlight
-          - Achievement unlocked ring
+    <!-- Light mode backgrounds — these are the DEFAULT values -->
+    <color name="bg_primary">#F4F4F5</color>
+    <color name="bg_surface_1">#FFFFFF</color>
+    <color name="bg_surface_2">#F0F0F2</color>
+    <color name="bg_surface_3">#E8E8EC</color>
+    <color name="bg_overlay">#66000000</color>
 
-        Everything else is grayscale.
-    -->
+    <!-- Light mode borders -->
+    <color name="border_subtle">#EBEBEB</color>
+    <color name="border_default">#DEDEDE</color>
+    <color name="border_strong">#C0C0C0</color>
 
-    <!-- ── Backgrounds ── -->
-    <color name="bg_primary">#0C0C0C</color>
-    <color name="bg_surface_1">#141414</color>
-    <color name="bg_surface_2">#1C1C1C</color>
-    <color name="bg_surface_3">#242424</color>
-    <color name="bg_overlay">#99000000</color>
+    <!-- Light mode text -->
+    <color name="text_1">#111111</color>
+    <color name="text_2">#555555</color>
+    <color name="text_3">#999999</color>
+    <color name="text_inverse">#FFFFFF</color>
 
-    <!-- ── Borders / Dividers ── -->
-    <color name="border_subtle">#1E1E1E</color>
-    <color name="border_default">#2A2A2A</color>
-    <color name="border_strong">#3A3A3A</color>
-
-    <!-- ── Text ── -->
-    <color name="text_1">#EDEDED</color>
-    <color name="text_2">#9A9A9A</color>
-    <color name="text_3">#555555</color>
-    <color name="text_inverse">#0C0C0C</color>
-
-    <!-- ── Orange Accent (use sparingly) ── -->
+    <!-- ── Orange Accent (Shared) ── -->
     <color name="orange">#FF6A00</color>
     <color name="orange_10">#1AFF6A00</color>
     <color name="orange_15">#26FF6A00</color>
     <color name="orange_20">#33FF6A00</color>
     <color name="orange_glow">#FF8C3A</color>
 
-    <!-- ── Semantic ── -->
+    <!-- ── Semantic (Shared) ── -->
     <color name="success">#34D399</color>
     <color name="success_10">#1A34D399</color>
     <color name="warning">#FBBF24</color>
@@ -66,8 +52,6 @@
     <color name="cat_rendering">#FBBF24</color>
     <color name="cat_nodes">#F87171</color>
     <color name="cat_materials">#F472B6</color>
-
-    <!-- ── Light mode overrides (in values/colors_semantic.xml) ── -->
 
     <!-- ── Compatibility (Legacy Color Names) ── -->
     <color name="orange_dim">@color/orange_10</color>

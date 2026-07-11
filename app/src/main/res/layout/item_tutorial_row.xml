@@ -1,40 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    TUTORIAL ROW — vertical list
-    Left: 72dp square gradient thumbnail with icon
-    Right: category label, title, difficulty badge + duration
--->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingTop="14dp"
-    android:paddingBottom="14dp"
     android:background="@drawable/bg_ripple_row"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp">
 
-    <!-- Thumbnail -->
+    <!--
+        Thumbnail: FrameLayout itself carries the background color.
+        The adapter sets setBackgroundResource() on fl_row_thumbnail directly.
+        This is more reliable than setting it on a child View.
+    -->
     <FrameLayout
-        android:layout_width="@dimen/thumb_row_size"
-        android:layout_height="@dimen/thumb_row_size"
-        android:layout_marginEnd="16dp">
-
-        <View
-            android:id="@+id/view_row_thumb_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_thumbnail_modeling"/>
+        android:id="@+id/fl_row_thumbnail"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_thumbnail_basics">
 
         <ImageView
             android:id="@+id/iv_row_icon"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
-            android:alpha="0.9"/>
+            android:src="@drawable/ic_school"/>
     </FrameLayout>
 
     <!-- Text block -->
@@ -44,58 +40,55 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <!-- Category label -->
         <TextView
             android:id="@+id/tv_row_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3D Modeling"
-            android:textColor="@color/orange"
-            android:textSize="@dimen/text_label"
-            android:textAllCaps="true"
+            android:layout_marginBottom="3dp"
             android:letterSpacing="0.06"
-            android:layout_marginBottom="3dp"/>
+            android:text="3D Modeling"
+            android:textAllCaps="true"
+            android:textColor="@color/orange"
+            android:textSize="10sp"/>
 
-        <!-- Title -->
         <TextView
             android:id="@+id/tv_row_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:text="Introduction to 3D Modeling"
             android:textColor="@color/text_1"
-            android:textSize="@dimen/text_body"
-            android:textStyle="bold"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="14sp"
+            android:textStyle="bold"/>
 
-        <!-- Bottom row: badge + dot + duration -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_row_difficulty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Beginner"
-                android:textColor="@color/diff_beginner"
-                android:textSize="@dimen/text_label"
-                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_badge_beginner"
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:background="@drawable/bg_badge_beginner"
-                android:layout_marginEnd="8dp"/>
+                android:text="Beginner"
+                android:textColor="#34D399"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
 
             <View
                 android:layout_width="3dp"
                 android:layout_height="3dp"
-                android:background="@color/text_3"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:background="@color/text_3"/>
 
             <TextView
                 android:id="@+id/tv_row_duration"
@@ -103,16 +96,16 @@
                 android:layout_height="wrap_content"
                 android:text="28 min"
                 android:textColor="@color/text_3"
-                android:textSize="@dimen/text_caption"/>
+                android:textSize="11sp"/>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Arrow -->
     <ImageView
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_marginStart="12dp"
-        android:src="@drawable/ic_arrow_right"
-        android:scaleType="fitCenter"/>
+        android:layout_marginEnd="16dp"
+        android:alpha="0.3"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow_right"/>
 
 </LinearLayout>

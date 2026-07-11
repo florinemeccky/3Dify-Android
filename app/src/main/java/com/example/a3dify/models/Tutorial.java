@@ -39,41 +39,44 @@ public class Tutorial {
     public String getTutorialId()  { return tutorialId; }
 
     /*
-     * Returns the correct drawable resource ID for this tutorial's
-     * category thumbnail background gradient.
-     * Used by TutorialAdapter to set the card thumbnail.
+     * Returns the drawable resource ID for this tutorial's
+     * colored gradient thumbnail background.
+     * Called by TutorialAdapter and TutorialDetailActivity.
      */
     public int getThumbnailBackground() {
+        if (category == null) return com.example.a3dify.R.drawable.bg_thumbnail_basics;
         switch (category) {
-            case "3D Modeling":         return com.example.a3dify.R.drawable.bg_thumbnail_modeling;
-            case "Animation":           return com.example.a3dify.R.drawable.bg_thumbnail_animation;
-            case "Sculpting":           return com.example.a3dify.R.drawable.bg_thumbnail_sculpting;
-            case "Rendering":           return com.example.a3dify.R.drawable.bg_thumbnail_rendering;
-            case "Geometry Nodes":      return com.example.a3dify.R.drawable.bg_thumbnail_nodes;
-            case "Materials & Textures":return com.example.a3dify.R.drawable.bg_thumbnail_materials;
-            default:                    return com.example.a3dify.R.drawable.bg_thumbnail_basics;
+            case "3D Modeling":          return com.example.a3dify.R.drawable.bg_thumbnail_modeling;
+            case "Animation":            return com.example.a3dify.R.drawable.bg_thumbnail_animation;
+            case "Sculpting":            return com.example.a3dify.R.drawable.bg_thumbnail_sculpting;
+            case "Rendering":            return com.example.a3dify.R.drawable.bg_thumbnail_rendering;
+            case "Geometry Nodes":       return com.example.a3dify.R.drawable.bg_thumbnail_nodes;
+            case "Materials & Textures": return com.example.a3dify.R.drawable.bg_thumbnail_materials;
+            default:                     return com.example.a3dify.R.drawable.bg_thumbnail_basics;
         }
     }
 
     /*
-     * Returns the correct vector icon drawable ID for this tutorial's category.
+     * Returns the vector icon drawable ID for this tutorial's category.
      */
     public int getCategoryIcon() {
+        if (category == null) return com.example.a3dify.R.drawable.ic_school;
         switch (category) {
-            case "3D Modeling":         return com.example.a3dify.R.drawable.ic_cube;
-            case "Animation":           return com.example.a3dify.R.drawable.ic_movie;
-            case "Sculpting":           return com.example.a3dify.R.drawable.ic_brush;
-            case "Rendering":           return com.example.a3dify.R.drawable.ic_image;
-            case "Geometry Nodes":      return com.example.a3dify.R.drawable.ic_device_hub;
-            case "Materials & Textures":return com.example.a3dify.R.drawable.ic_palette;
-            default:                    return com.example.a3dify.R.drawable.ic_school;
+            case "3D Modeling":          return com.example.a3dify.R.drawable.ic_cube;
+            case "Animation":            return com.example.a3dify.R.drawable.ic_movie;
+            case "Sculpting":            return com.example.a3dify.R.drawable.ic_brush;
+            case "Rendering":            return com.example.a3dify.R.drawable.ic_image;
+            case "Geometry Nodes":       return com.example.a3dify.R.drawable.ic_device_hub;
+            case "Materials & Textures": return com.example.a3dify.R.drawable.ic_palette;
+            default:                     return com.example.a3dify.R.drawable.ic_school;
         }
     }
 
     /*
-     * Returns the correct badge drawable for the difficulty level.
+     * Returns the difficulty badge background drawable.
      */
     public int getDifficultyBadgeBackground() {
+        if (difficulty == null) return com.example.a3dify.R.drawable.bg_badge_beginner;
         switch (difficulty) {
             case "Intermediate": return com.example.a3dify.R.drawable.bg_badge_intermediate;
             case "Advanced":     return com.example.a3dify.R.drawable.bg_badge_advanced;
@@ -85,6 +88,7 @@ public class Tutorial {
      * Returns the text color for the difficulty badge.
      */
     public int getDifficultyColor() {
+        if (difficulty == null) return android.graphics.Color.parseColor("#34D399");
         switch (difficulty) {
             case "Intermediate": return android.graphics.Color.parseColor("#FBBF24");
             case "Advanced":     return android.graphics.Color.parseColor("#F87171");

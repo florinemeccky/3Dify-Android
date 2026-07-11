@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    values-night/colors.xml
-    Applied automatically when dark mode is active.
-    Deep blacks, dark cards, orange accents.
--->
 <resources>
-    <color name="background_primary">#0A0A0A</color>
-    <color name="background_card">#111111</color>
-    <color name="background_card2">#1A1A1A</color>
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#E0E0E0</color>
-    <color name="text_muted">#888888</color>
-    <color name="text_hint">#444444</color>
-    <color name="border_color">#222222</color>
-    <color name="divider_color">#2A2A2A</color>
-    <color name="splash_bg">#0A0A0A</color>
-    <color name="row_bg">#111111</color>
-    <color name="input_bg">#111111</color>
+    <!-- Dark mode backgrounds -->
+    <color name="bg_primary">#0C0C0C</color>
+    <color name="bg_surface_1">#141414</color>
+    <color name="bg_surface_2">#1C1C1C</color>
+    <color name="bg_surface_3">#242424</color>
+    <color name="bg_overlay">#99000000</color>
+
+    <!-- Dark mode borders -->
+    <color name="border_subtle">#1E1E1E</color>
+    <color name="border_default">#2A2A2A</color>
+    <color name="border_strong">#3A3A3A</color>
+
+    <!-- Dark mode text -->
+    <color name="text_1">#EDEDED</color>
+    <color name="text_2">#9A9A9A</color>
+    <color name="text_3">#555555</color>
+    <color name="text_inverse">#0C0C0C</color>
+
+    <!-- Semantic aliases -->
+    <color name="background_primary">#0C0C0C</color>
+    <color name="background_card">#141414</color>
+    <color name="background_card2">#1C1C1C</color>
+    <color name="text_primary">#EDEDED</color>
+    <color name="text_secondary">#9A9A9A</color>
+    <color name="text_muted">#555555</color>
+    <color name="text_hint">#555555</color>
+    <color name="border_color">#2A2A2A</color>
 </resources>

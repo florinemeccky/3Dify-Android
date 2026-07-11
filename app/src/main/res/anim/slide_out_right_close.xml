@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Used when an Activity closes (Back pressed).
-    The CURRENT screen slides out to the right.
-    Starts from 0 so there is no flicker at the beginning.
+    Back navigation EXIT — current screen slides out to right.
+    Fades slightly so the exit feels natural, not abrupt.
 -->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <translate
