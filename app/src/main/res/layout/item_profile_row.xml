@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Profile menu row.
+    Height: 72dp — comfortable, generously tappable.
+    Based on the NMB Mobile / Google Settings row standard.
+    Left: 24dp icon zone + 20dp gap
+    Center: label at 16sp
+    Right: subtle arrow
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
+    android:layout_height="72dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:paddingStart="20dp"
@@ -11,28 +19,31 @@
     android:clickable="true"
     android:focusable="true">
 
+    <!-- Icon — slightly larger and with full opacity at 60% -->
     <ImageView
         android:id="@+id/iv_row_icon"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:scaleType="fitCenter"
-        android:alpha="0.5"
+        android:alpha="0.6"
         android:layout_marginEnd="20dp"/>
 
+    <!-- Label — takes all space, comfortable text size -->
     <TextView
         android:id="@+id/tv_row_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Menu Item"
-        android:textColor="@color/text_1"
-        android:textSize="15sp"/>
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"/>
 
+    <!-- Arrow — subtle -->
     <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
         android:src="@drawable/ic_arrow_right"
         android:scaleType="fitCenter"
-        android:alpha="0.3"/>
+        android:alpha="0.25"/>
 
 </LinearLayout>

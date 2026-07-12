@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    HOME FRAGMENT
-    Precision Dark v2 — no emoji, real icons, orange only for accents.
-    Layout:
-      1. Hero section (greeting + motivational text + CTA)
-      2. Search bar
-      3. Continue Learning card
-      4. Category pills (horizontal scroll)
-      5. Featured tutorials (horizontal scroll)
+    HOME FRAGMENT — Redesigned
+    Sections:
+    1. Greeting + Notification bell
+    2. Search bar
+    3. Continue Learning card
+    4. Categories horizontal scroll
+    5. 3D Tools section (replaces Featured Tutorials)
+    6. Daily Challenge card
+    7. Learning Roadmap card
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground">
@@ -22,83 +22,66 @@
         android:orientation="vertical"
         android:paddingBottom="32dp">
 
-        <!-- ════════════════════════════════════
-             HERO SECTION
-             ════════════════════════════════════ -->
+        <!-- ════ 1. GREETING ════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/screen_margin"
-            android:paddingEnd="@dimen/screen_margin"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:paddingTop="32dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="20dp">
 
-            <!-- Greeting row -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="4dp">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_greeting_label"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Good morning,"
-                    android:textColor="@color/text_3"
-                    android:textSize="@dimen/text_body"/>
+                    android:textColor="@color/text_muted"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="2dp"/>
 
-                <!-- Notification bell -->
-                <LinearLayout
-                    android:id="@+id/btn_notif"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:background="@drawable/bg_surface_2"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_bell"
-                        android:scaleType="fitCenter"/>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Florine"
+                    android:textColor="@color/text_primary"
+                    android:textSize="26sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
-            <!-- Username -->
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Florine"
-                android:textColor="@color/text_1"
-                android:textSize="@dimen/text_display"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"/>
+            <!-- Notification bell -->
+            <LinearLayout
+                android:id="@+id/btn_notif"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:background="@drawable/bg_surface_2"
+                android:clickable="true"
+                android:focusable="true">
 
-            <!-- Motivational subtitle -->
-            <TextView
-                android:id="@+id/tv_quote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ready to create something amazing today?"
-                android:textColor="@color/text_2"
-                android:textSize="@dimen/text_body"
-                android:lineSpacingMultiplier="1.5"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_bell"
+                    android:scaleType="fitCenter"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- ════════════════════════════════════
-             SEARCH BAR
-             ════════════════════════════════════ -->
+        <!-- ════ 2. SEARCH BAR ════ -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginStart="@dimen/screen_margin"
-            android:layout_marginEnd="@dimen/screen_margin"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="28dp"
             android:background="@drawable/bg_input_default"
             android:orientation="horizontal"
@@ -110,7 +93,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_nav_explore"
-                android:alpha="0.4"
+                android:alpha="0.35"
                 android:layout_marginEnd="12dp"
                 android:scaleType="fitCenter"/>
 
@@ -120,16 +103,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Search Blender tutorials, materials, animation…"
-                android:textColor="@color/text_1"
-                android:textColorHint="@color/text_3"
-                android:textSize="@dimen/text_body"
+                android:hint="Search Blender tutorials, animation, materials…"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
+                android:textSize="14sp"
                 android:inputType="text"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"/>
         </LinearLayout>
 
-        <!-- No results message -->
+        <!-- No results state -->
         <LinearLayout
             android:id="@+id/ll_no_results"
             android:layout_width="match_parent"
@@ -138,8 +121,8 @@
             android:gravity="center"
             android:paddingTop="24dp"
             android:paddingBottom="24dp"
-            android:paddingStart="@dimen/screen_margin"
-            android:paddingEnd="@dimen/screen_margin"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:visibility="gone">
 
             <ImageView
@@ -152,8 +135,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Couldn't find anything."
-                android:textColor="@color/text_2"
-                android:textSize="@dimen/text_headline"
+                android:textColor="@color/text_secondary"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginBottom="8dp"/>
@@ -162,34 +145,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Try searching for Animation, Materials or Geometry Nodes"
-                android:textColor="@color/text_3"
-                android:textSize="@dimen/text_body"
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.5"/>
         </LinearLayout>
 
-        <!-- ════════════════════════════════════
-             CONTINUE LEARNING
-             ════════════════════════════════════ -->
+        <!-- ════ 3. CONTINUE LEARNING ════ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_margin"
-            android:layout_marginBottom="12dp"
-            android:text="Continue Learning"
-            style="@style/TextAppearance.3Dify.SectionLabel"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="CONTINUE LEARNING"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp"
+            android:letterSpacing="0.12"
+            android:textAllCaps="true"/>
 
         <LinearLayout
             android:id="@+id/card_continue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_margin"
-            android:layout_marginEnd="@dimen/screen_margin"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="28dp"
             android:background="@drawable/bg_ripple_card"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="@dimen/card_padding"
+            android:padding="14dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -226,8 +210,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Intro to 3D Modeling"
-                    android:textColor="@color/text_1"
-                    android:textSize="@dimen/text_body_lg"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:maxLines="1"
                     android:ellipsize="end"
@@ -238,92 +222,147 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Continue where you left off"
-                    android:textColor="@color/text_3"
-                    android:textSize="@dimen/text_caption"
-                    android:layout_marginBottom="8dp"/>
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"/>
 
                 <!-- Progress bar -->
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:background="@color/border_default">
-
+                    android:layout_height="4dp"
+                    android:background="@color/border_color">
                     <View
                         android:id="@+id/view_progress_fill"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/orange"/>
+                        android:layout_height="4dp"
+                        android:background="#FF6A00"/>
                 </FrameLayout>
             </LinearLayout>
 
             <!-- Arrow -->
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
                 android:layout_marginStart="12dp"
                 android:src="@drawable/ic_arrow_right"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:alpha="0.4"/>
         </LinearLayout>
 
-        <!-- ════════════════════════════════════
-             CATEGORIES
-             ════════════════════════════════════ -->
+        <!-- ════ 4. CATEGORIES ════ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/screen_margin"
-            android:layout_marginBottom="12dp"
-            android:text="Categories"
-            style="@style/TextAppearance.3Dify.SectionLabel"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="CATEGORIES"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp"
+            android:letterSpacing="0.12"
+            android:textAllCaps="true"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
-            android:paddingStart="@dimen/screen_margin"
-            android:paddingEnd="@dimen/screen_margin"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:clipToPadding="false"
             android:orientation="horizontal"/>
 
-        <!-- ════════════════════════════════════
-             FEATURED TUTORIALS
-             ════════════════════════════════════ -->
+        <!-- ════ 5. 3D TOOLS SECTION ════ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingStart="@dimen/screen_margin"
-            android:paddingEnd="@dimen/screen_margin"
-            android:layout_marginBottom="12dp">
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Featured"
-                style="@style/TextAppearance.3Dify.SectionLabel"/>
+                android:text="3D TOOLS"
+                android:textColor="@color/text_muted"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"
+                android:textAllCaps="true"/>
 
             <TextView
-                android:id="@+id/tv_see_all"
+                android:id="@+id/tv_see_all_tools"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="See all"
-                android:textColor="@color/orange"
-                android:textSize="@dimen/text_body_sm"
+                android:textColor="#FF6A00"
+                android:textSize="12sp"
                 android:clickable="true"
                 android:focusable="true"/>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_featured"
+        <!--
+            Software tools list — shown inside a card container.
+            RecyclerView is set to non-scrollable inside NestedScrollView.
+        -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/screen_margin"
-            android:paddingEnd="@dimen/screen_margin"
-            android:clipToPadding="false"
-            android:orientation="horizontal"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/bg_section_card"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_software_tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+        </LinearLayout>
+
+        <!-- ════ 6. DAILY CHALLENGE ════ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="TODAY"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp"
+            android:letterSpacing="0.12"
+            android:textAllCaps="true"/>
+
+        <!-- Challenge card included inline -->
+        <include
+            layout="@layout/layout_daily_challenge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="28dp"/>
+
+        <!-- ════ 7. LEARNING ROADMAP ════ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="ROADMAP"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp"
+            android:letterSpacing="0.12"
+            android:textAllCaps="true"/>
+
+        <include
+            layout="@layout/layout_learning_roadmap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
