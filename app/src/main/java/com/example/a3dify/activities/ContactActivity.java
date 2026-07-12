@@ -22,8 +22,8 @@ import com.example.a3dify.R;
 public class ContactActivity extends AppCompatActivity {
 
     // Replace these with your real support contact details
-    private static final String SUPPORT_PHONE = "+255700000000";
-    private static final String SUPPORT_EMAIL = "support@3dify.app";
+    private static final String SUPPORT_PHONE = "+255614886685";
+    private static final String SUPPORT_EMAIL = "florinemeccky@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
