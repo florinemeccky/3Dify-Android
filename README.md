@@ -63,13 +63,16 @@ The project is being built using Java and XML in Android Studio with a modern ne
 
 ## 📸 Screenshots
 
-<img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 04 (2)" src="https://github.com/user-attachments/assets/a597606c-0e9c-43cf-b55f-7eb4b8012655" />
+
 <img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 04" src="https://github.com/user-attachments/assets/8f7acf77-8c71-4819-af72-59e847ef892c" />
-<img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 05 (1)" src="https://github.com/user-attachments/assets/6f5372a9-6062-432b-9942-8cad095bf30a" />
-<img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 05 (2)" src="https://github.com/user-attachments/assets/c58b1ac3-c31d-4c64-b1f5-3ac7d5f38a84" />
-<img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 05 (3)" src="https://github.com/user-attachments/assets/fb48e59b-2148-4d8a-b923-0fdb48e79a42" />
-<img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 05" src="https://github.com/user-attachments/assets/23ccb610-e9e7-4fb4-86ad-0ef4b4bf7bd6" />
 <img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 04 (1)" src="https://github.com/user-attachments/assets/7f07b63f-4bd0-477a-a0df-61f6af4d1d18" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59 (4)" src="https://github.com/user-attachments/assets/a3846601-a0e7-4267-9893-7b03f2669837" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 39 00" src="https://github.com/user-attachments/assets/04acfdfe-40cf-4b75-8752-de1a4bd21bee" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 39 00 (1)" src="https://github.com/user-attachments/assets/bcdcab34-9a11-429c-a2d4-2fded46d40e5" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59" src="https://github.com/user-attachments/assets/2722b9e8-7bf1-48da-aa2e-14f1f3877914" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59 (3)" src="https://github.com/user-attachments/assets/c42a7d90-5f3a-4746-a513-a1f76398468e" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59 (2)" src="https://github.com/user-attachments/assets/131b261c-b92e-49fa-870d-128039a6348e" />
+<img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59 (1)" src="https://github.com/user-attachments/assets/78f9e066-007e-49ce-b6fb-befa9a46c1ca" />
 
 
 ## 🚀 Future Plans
