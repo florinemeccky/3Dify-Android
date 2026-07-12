@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:paddingTop="40dp"
-            android:paddingBottom="32dp"
+            android:paddingBottom="40dp"
             android:paddingStart="@dimen/screen_margin"
             android:paddingEnd="@dimen/screen_margin">
 
@@ -131,120 +131,41 @@
 
         </LinearLayout>
 
-        <!-- ══ DIVIDER ══ -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginBottom="8dp"/>
-
         <!-- ══ MENU ROWS ══ -->
-        <!-- Each row is a flat item with a hairline separator beneath it -->
+        <!-- Each row is now a distinct card with vertical spacing -->
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_account"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_settings"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_feedback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_feedback"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_reports"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_reports"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_contact"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_complaints"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_complaints"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_help"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginStart="62dp"
-            android:layout_marginEnd="0dp"/>
+            android:id="@+id/row_help"/>
 
         <include layout="@layout/item_profile_row"
-            android:id="@+id/row_privacy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- ══ DIVIDER ══ -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/border_subtle"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="28dp"/>
+            android:id="@+id/row_privacy"/>
 
         <!-- ══ LOGOUT ══ -->
         <LinearLayout
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginStart="@dimen/screen_margin"
-            android:layout_marginEnd="@dimen/screen_margin"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_btn_danger"
             android:orientation="horizontal"
             android:gravity="center"

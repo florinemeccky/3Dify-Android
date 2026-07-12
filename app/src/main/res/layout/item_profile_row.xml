@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Profile menu row.
-    Height: 72dp — comfortable, generously tappable.
-    Based on the NMB Mobile / Google Settings row standard.
-    Left: 24dp icon zone + 20dp gap
-    Center: label at 16sp
-    Right: subtle arrow
+    Redesigned Profile Menu Card
+    Height: 74dp
+    Card-style with 12dp radius and 1dp border.
+    Internal padding: 18dp
+    Vertical spacing: 12dp (via margin)
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="74dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp"
-    android:background="@drawable/bg_ripple_row"
+    android:paddingStart="18dp"
+    android:paddingEnd="18dp"
+    android:layout_marginBottom="12dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:background="@drawable/bg_profile_card"
     android:clickable="true"
     android:focusable="true">
 
-    <!-- Icon — slightly larger and with full opacity at 60% -->
+    <!-- Icon — 24dp fixed size -->
     <ImageView
         android:id="@+id/iv_row_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:scaleType="fitCenter"
-        android:alpha="0.6"
+        android:alpha="0.7"
         android:layout_marginEnd="20dp"/>
 
-    <!-- Label — takes all space, comfortable text size -->
+    <!-- Label — 16sp title -->
     <TextView
         android:id="@+id/tv_row_label"
         android:layout_width="0dp"
@@ -36,9 +38,10 @@
         android:layout_weight="1"
         android:text="Menu Item"
         android:textColor="@color/text_primary"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
-    <!-- Arrow — subtle -->
+    <!-- Arrow — subtle indicator -->
     <ImageView
         android:layout_width="14dp"
         android:layout_height="14dp"
