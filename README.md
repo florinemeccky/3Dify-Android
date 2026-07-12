@@ -1,68 +1,122 @@
 # 3Dify 🚀
 
-3Dify is a futuristic Android application focused on 3D learning, creativity, animation, and digital design.
+3Dify is a modern Android application designed to help beginners learn 3D modeling, animation, sculpting, and rendering through an intuitive mobile learning experience.
 
-The project is being built using Java and XML in Android Studio with a modern neon-inspired UI system and scalable architecture.
-
----
-
-## ✨ Features
-
-* Futuristic dark UI
-* Neon orange accent design
-* Animated splash screen
-* Pulse loading animations
-* Scalable Android architecture
-* Fragment-based navigation
-* Modern onboarding flow
-* Bottom navigation system
-* Smooth user experience
+Built using Java and XML in Android Studio, 3Dify combines a professional dark UI with Firebase services, SQLite, and interactive learning features to provide an engaging educational platform for aspiring 3D artists.
 
 ---
 
-## 🛠 Built With
+# ✨ Features
+
+### User Authentication
+
+* Secure user registration
+* Email & password login
+* Password reset via email
+* Firebase Authentication
+
+### Learning Platform
+
+* Browse tutorials by category
+* Search tutorials
+* Continue Learning section
+* Tutorial detail pages
+* Mark tutorials as completed
+* Personal learning progress
+* Learning roadmap
+* Daily challenge section
+* 3D software information hub
+
+### Progress Tracking
+
+* Completed tutorials
+* Learning statistics
+* Skill progress
+* Achievement system
+* Report generation
+
+### User Features
+
+* User profile
+* Account management
+* Settings
+* Dark mode
+* Feedback submission
+* Complaint submission
+* Help center
+* Privacy policy
+* Contact support
+
+### Communication Features
+
+* Phone call integration
+* SMS support
+* Email support
+* Offline detection
+* Bluetooth settings shortcut
+
+### Database
+
+* SQLite local database
+* Firebase Realtime Database
+* Firebase Authentication
+
+---
+
+# 🛠 Built With
 
 * Java
 * XML
 * Android Studio
-* ConstraintLayout
+* SQLite
+* Firebase Authentication
+* Firebase Realtime Database
 * Material Design Components
+* ConstraintLayout
+* RecyclerView
+* CardView
 
 ---
 
-## 📱 Current Progress
-
-### Completed
+# 📱 Application Screens
 
 * Splash Screen
-* Neon UI styling
-* Animated loading dots
-* Theme system
-* Colors & drawables
-* Architecture planning
-
-### In Progress
-
-* Onboarding screens
-* Login system
-* Main dashboard
-* Navigation fragments
-
----
-
-## 🧠 Project Vision
-
-3Dify aims to become a modern platform for:
-
-* 3D learning
-* animation education
-* creative tools
-* futuristic digital experiences
+* Login
+* Register
+* Reset Password
+* Home
+* Explore
+* Progress
+* Profile
+* Tutorial Details
+* Account
+* Settings
+* Contact
+* Feedback
+* Complaints
+* Reports
+* Help
+* Privacy Policy
 
 ---
 
-## 📸 Screenshots
+# 🎨 Design
 
+The application follows a custom **Precision Dark** design system inspired by modern Android applications and productivity software.
+
+Highlights include:
+
+* Professional dark interface
+* Neon orange accent color
+* Modern typography
+* Consistent card layouts
+* Bottom navigation
+* Responsive UI
+* Smooth animations
+
+---
+
+# 📸 Screenshots
 
 <img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 04" src="https://github.com/user-attachments/assets/8f7acf77-8c71-4819-af72-59e847ef892c" />
 <img width="498" height="1080" alt="WhatsApp Image 2026-05-21 at 03 02 04 (1)" src="https://github.com/user-attachments/assets/7f07b63f-4bd0-477a-a0df-61f6af4d1d18" />
@@ -74,24 +128,66 @@ The project is being built using Java and XML in Android Studio with a modern ne
 <img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59 (2)" src="https://github.com/user-attachments/assets/131b261c-b92e-49fa-870d-128039a6348e" />
 <img width="512" height="1080" alt="WhatsApp Image 2026-07-12 at 06 38 59 (1)" src="https://github.com/user-attachments/assets/78f9e066-007e-49ce-b6fb-befa9a46c1ca" />
 
+# 🚀 Current Features
 
-## 🚀 Future Plans
-
-* Firebase authentication
-* User profiles
-* Interactive learning modules
-* 3D model previews
-* AI-assisted design tools
-* Cloud sync
+* Animated splash screen
+* Secure authentication
+* Firebase cloud integration
+* SQLite offline support
+* Bottom navigation
+* Tutorial browsing
+* Category filtering
+* Search functionality
+* Progress tracking
+* Continue learning
+* User profile
+* Report generation
+* Contact support
+* Feedback system
+* Complaint management
+* Bluetooth integration
+* Offline banner
+* Dark mode
 
 ---
 
-## 👨‍💻 Developer
+# 🧠 Project Purpose
 
-Created by Florine
+3Dify was developed as a university Android application project to provide an accessible mobile platform for learning 3D design and animation concepts.
+
+The application demonstrates modern Android development practices, user authentication, local and cloud databases, responsive UI design, and mobile communication features.
 
 ---
 
-## 📌 Status
+# 🔮 Future Improvements
 
-Currently under active development.
+* Video streaming support
+* Downloadable learning resources
+* Interactive quizzes
+* Push notifications
+* AI-assisted learning recommendations
+* Cross-device progress synchronization
+* Community discussion features
+* User achievements and badges
+
+---
+
+# 👨‍💻 Developer
+
+**Florine**
+
+Bachelor of Computer Science
+
+Institute of Finance Management (IFM)
+
+Dar es Salaam, Tanzania
+
+GitHub: **florinemeccky**
+
+---
+
+# 📌 Project Status
+
+🟢 **Actively Developed**
+
+The core application is fully functional and continues to receive UI improvements, performance optimizations, and additional learning features.
